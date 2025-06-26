@@ -4,6 +4,19 @@ import {
   ChevronRightIcon,
   PlayIcon,
   PauseIcon,
+  RefreshCw,
+  Users,
+  Mail,
+  MessageSquareX,
+  UserX,
+  FileText,
+  MessageCircle,
+  Stethoscope,
+  Network,
+  Award,
+  Eye,
+  Repeat,
+  Building,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "../../../../components/ui/card";
@@ -30,7 +43,7 @@ export const BenefitsSection = () => {
       color: "from-blue-500 to-cyan-500",
       challenges: [
         {
-          icon: "/solar-repeat-bold.svg",
+          icon: RefreshCw,
           title: "Same Interview. Again. And Again.",
           description:
             "Hospitals ask identical questions — no one saves progress.",
@@ -39,7 +52,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-red-500",
         },
         {
-          icon: "/group.png",
+          icon: Building,
           title: "Every job board feels random.",
           description:
             "Naukri and LinkedIn are flooded with IT & marketing. Rahul has to dig deep to find one real medical opportunity",
@@ -48,7 +61,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-orange-500",
         },
         {
-          icon: "/fluent-mail-off-16-regular.svg",
+          icon: Mail,
           title: "No Replies After Applying",
           description: "Sent out 25+ applications. Hardly anyone sees them.",
           position: "bottom-[60px] left-0",
@@ -56,7 +69,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-purple-500",
         },
         {
-          icon: "/mynaui-message-x.svg",
+          icon: Network,
           title: "No Network, No Guidance",
           description:
             "No mentors, no peers, no verified network to ask for advice or help",
@@ -78,7 +91,7 @@ export const BenefitsSection = () => {
       color: "from-green-500 to-emerald-500",
       challenges: [
         {
-          icon: "/user-x-icon.svg",
+          icon: UserX,
           title: "No Placement, No Guidance",
           description: "College doesn't support job search — she's on her own.",
           position: "top-[60px] left-0",
@@ -86,7 +99,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-red-500",
         },
         {
-          icon: "/document-icon.svg",
+          icon: FileText,
           title: "No Way to Stand Out",
           description: "Her resume looks the same as hundreds of others.",
           position: "top-[60px] right-0",
@@ -94,7 +107,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-yellow-500",
         },
         {
-          icon: "/whatsapp-icon.svg",
+          icon: MessageCircle,
           title: "Only Finds Jobs on WhatsApp",
           description: "Unverified links, dead ends, and no real offers.",
           position: "bottom-[60px] left-0",
@@ -102,7 +115,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-green-500",
         },
         {
-          icon: "/mentor-icon.svg",
+          icon: Users,
           title: "No Mentors, No Clarity",
           description:
             "No one to guide her on interviews, skills, or career paths.",
@@ -124,7 +137,7 @@ export const BenefitsSection = () => {
       color: "from-purple-500 to-violet-500",
       challenges: [
         {
-          icon: "/reputation-icon.svg",
+          icon: Award,
           title: "Reputation Doesn't Travel with Her",
           description:
             "Each new hospital treats her like a fresh face — decades of experience don't follow.",
@@ -133,7 +146,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-blue-500",
         },
         {
-          icon: "/disconnect-icon.svg",
+          icon: Network,
           title: "Disconnected After Every Transfer",
           description:
             "No long-term network — colleagues change, WhatsApp groups vanish.",
@@ -142,7 +155,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-red-500",
         },
         {
-          icon: "/case-icon.svg",
+          icon: Stethoscope,
           title: "Loses Ongoing Case Discussions",
           description:
             "No consistent peer group to discuss complex cases or learn from.",
@@ -151,7 +164,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-teal-500",
         },
         {
-          icon: "/profile-icon.svg",
+          icon: FileText,
           title: "No Single Place to Track Her Career",
           description:
             "No verified digital profile that captures her journey across cities and institutions.",
@@ -173,7 +186,7 @@ export const BenefitsSection = () => {
       color: "from-orange-500 to-red-500",
       challenges: [
         {
-          icon: "/experience-icon.svg",
+          icon: Award,
           title: "No Way to Prove Real Experience",
           description:
             "His work is hands-on, but there's no verified record that shows it.",
@@ -182,7 +195,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-emerald-500",
         },
         {
-          icon: "/recruiter-icon.svg",
+          icon: Eye,
           title: "Overlooked by Recruiters",
           description:
             "Most hiring platforms are built for doctors or nurses — AHPs get ignored.",
@@ -191,7 +204,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-violet-500",
         },
         {
-          icon: "/process-icon.svg",
+          icon: Repeat,
           title: "Same Process, Every Time",
           description:
             "Every job means printing a CV and going through basic screenings again.",
@@ -200,7 +213,7 @@ export const BenefitsSection = () => {
           iconColor: "bg-rose-500",
         },
         {
-          icon: "/community-icon.svg",
+          icon: Users,
           title: "No Peer Community",
           description:
             "There's no space for OT techs to connect, discuss, or learn from each other.",
@@ -279,20 +292,6 @@ export const BenefitsSection = () => {
     setTimeout(() => setIsLoading(false), 300);
   };
 
-  const handleDotClick = (index) => {
-    setIsLoading(true);
-
-    // Pause auto-rotation temporarily when user interacts
-    setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 8000); // Resume after 8 seconds
-
-    setDirection(index > currentProfileIndex ? 1 : -1);
-    setCurrentProfileIndex(index);
-
-    // Brief loading state for smooth UX
-    setTimeout(() => setIsLoading(false), 300);
-  };
-
   const toggleAutoPlay = () => {
     setIsAutoPlaying(!isAutoPlaying);
   };
@@ -335,28 +334,37 @@ export const BenefitsSection = () => {
   const challengeCardVariants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.9,
-      rotateX: 15,
+      y: 20,
+      scale: 0.95,
     },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       scale: 1,
-      rotateX: 0,
       transition: {
-        delay: i * 0.08,
-        duration: 0.5,
+        delay: i * 0.1,
+        duration: 0.4,
         type: "spring",
-        stiffness: 120,
-        damping: 20,
+        stiffness: 100,
+        damping: 15,
       },
     }),
     hover: {
-      scale: 1.03,
-      y: -4,
-      rotateX: -2,
-      boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+      scale: 1.05,
+      y: -8,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+      },
+    },
+  };
+
+  const challengeIconVariants = {
+    initial: { scale: 1, rotate: 0 },
+    hover: {
+      scale: 1.2,
+      rotate: 10,
       transition: {
         type: "spring",
         stiffness: 400,
@@ -765,56 +773,71 @@ export const BenefitsSection = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              {currentProfile.challenges.map((card, index) => (
-                <motion.div
-                  key={`challenge-card-${currentProfile.id}-${index}`}
-                  className={`inline-flex flex-col items-start gap-4 absolute ${card.position}`}
-                  custom={index}
-                  variants={challengeCardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                >
+              {currentProfile.challenges.map((card, index) => {
+                const IconComponent = card.icon;
+                return (
                   <motion.div
-                    className={`relative w-12 h-12 ${card.color} rounded-xl overflow-hidden border-2 shadow-lg`}
-                    whileHover={{
-                      boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
-                      y: -2,
-                      rotate: 5,
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    key={`challenge-card-${currentProfile.id}-${index}`}
+                    className={`inline-flex flex-col items-start gap-4 absolute ${card.position} cursor-pointer`}
+                    custom={index}
+                    variants={challengeCardVariants}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover="hover"
                   >
                     <motion.div
-                      className={`absolute w-6 h-6 top-3 left-3 ${card.iconColor} rounded-lg flex items-center justify-center`}
-                      whileHover={{ rotate: 180, scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
+                      className={`relative w-12 h-12 ${card.color} rounded-xl overflow-hidden border-2 shadow-md group`}
+                      whileHover={{
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                        borderColor: card.iconColor.replace("bg-", "border-"),
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
                     >
-                      <div className="w-3 h-3 bg-white rounded-sm"></div>
+                      <motion.div
+                        className={`absolute inset-0 ${card.iconColor} rounded-lg m-1 flex items-center justify-center`}
+                        variants={challengeIconVariants}
+                        initial="initial"
+                        whileHover="hover"
+                      >
+                        <IconComponent className="w-5 h-5 text-white" />
+                      </motion.div>
+                    </motion.div>
+
+                    <motion.div
+                      className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-black text-xl tracking-[0] leading-7"
+                      whileHover={{ x: 3, color: "#1890FF" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      {card.title}
+                    </motion.div>
+
+                    <motion.div
+                      className="relative w-[280px] [font-family:'Inter',Helvetica] font-normal text-neutral-7 text-base tracking-[0] leading-6"
+                      whileHover={{ x: 3 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      {card.description}
                     </motion.div>
                   </motion.div>
-
-                  <motion.div
-                    className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-black text-xl tracking-[0] leading-7"
-                    whileHover={{ x: 5, color: "#1890FF" }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    {card.title}
-                  </motion.div>
-
-                  <motion.div
-                    className="relative w-[280px] [font-family:'Inter',Helvetica] font-normal text-neutral-7 text-base tracking-[0] leading-6"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    {card.description}
-                  </motion.div>
-                </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </motion.div>
 
-        {/* Enhanced Controls Section */}
+        {/* Enhanced Controls Section - Removed dots */}
         <motion.div
           className="flex items-center gap-6 z-50 mt-8 relative"
           variants={sectionVariants}
@@ -841,68 +864,6 @@ export const BenefitsSection = () => {
               )}
             </motion.div>
           </motion.button>
-
-          {/* Enhanced Profile Indicator Dots */}
-          <div className="flex gap-3">
-            {profiles.map((_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => handleDotClick(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 cursor-pointer relative overflow-hidden border-2 ${
-                  index === currentProfileIndex
-                    ? "bg-blue-600 border-blue-600"
-                    : "bg-gray-200 border-gray-300"
-                }`}
-                whileHover={{
-                  scale: 1.4,
-                  backgroundColor:
-                    index === currentProfileIndex ? "#1d4ed8" : "#6b7280",
-                  borderColor:
-                    index === currentProfileIndex ? "#1d4ed8" : "#6b7280",
-                }}
-                whileTap={{ scale: 0.9 }}
-                animate={{
-                  scale: index === currentProfileIndex ? 1.6 : 1,
-                  backgroundColor:
-                    index === currentProfileIndex ? "#2563eb" : "#e5e7eb",
-                  borderColor:
-                    index === currentProfileIndex ? "#2563eb" : "#d1d5db",
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                aria-label={`Go to profile ${index + 1}`}
-                type="button"
-              >
-                {/* Enhanced Auto-rotation progress indicator */}
-                {index === currentProfileIndex &&
-                  isAutoPlaying &&
-                  !isPaused && (
-                    <motion.div
-                      className="absolute inset-0 bg-blue-400 rounded-full"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 4, ease: "linear" }}
-                      key={`progress-${currentProfileIndex}`}
-                    />
-                  )}
-
-                {/* Pulse effect for active dot */}
-                {index === currentProfileIndex && (
-                  <motion.div
-                    className="absolute inset-0 bg-blue-400 rounded-full"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.5, 0, 0.5],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
 
           {/* Status indicator with tooltip */}
           <motion.div className="relative group" whileHover={{ scale: 1.1 }}>
