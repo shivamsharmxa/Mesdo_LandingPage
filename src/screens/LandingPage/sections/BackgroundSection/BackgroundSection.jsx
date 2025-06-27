@@ -117,16 +117,16 @@ export const BackgroundSection = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-start gap-2 py-[150px] px-[150px] relative w-full bg-white overflow-hidden"
+      className="flex flex-col items-start gap-2 py-[80px] sm:py-[100px] md:py-[120px] lg:py-[140px] xl:py-[150px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[150px] relative w-full bg-white overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
     >
-      {/* Enhanced ambient background elements */}
+      {/* Enhanced responsive ambient background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 left-20 w-60 h-60 bg-blue-100/40 rounded-full blur-3xl"
+          className="absolute top-10 sm:top-16 md:top-20 left-4 sm:left-8 md:left-12 lg:left-16 xl:left-20 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 bg-blue-100/40 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.4, 0.2],
@@ -140,7 +140,7 @@ export const BackgroundSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-32 right-20 w-40 h-40 bg-purple-100/40 rounded-full blur-3xl"
+          className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 xl:bottom-32 right-4 sm:right-8 md:right-12 lg:right-16 xl:right-20 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 xl:w-40 xl:h-40 bg-purple-100/40 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.4, 1],
             opacity: [0.15, 0.35, 0.15],
@@ -156,15 +156,15 @@ export const BackgroundSection = () => {
         />
       </div>
 
-      <div className="flex items-end justify-between relative w-full z-10">
-        <div className="flex flex-col items-start gap-[59px] max-w-[613px]">
+      <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between relative w-full z-10 gap-8 xl:gap-0">
+        <div className="flex flex-col items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-[59px] w-full xl:max-w-[613px]">
           <motion.div
-            className="flex flex-col items-start gap-16 max-w-[520px]"
+            className="flex flex-col items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16 w-full xl:max-w-[520px]"
             variants={headerVariants}
           >
-            <div className="flex flex-col items-start gap-3.5">
+            <div className="flex flex-col items-start gap-3 sm:gap-3.5">
               <motion.span
-                className="font-medium text-primary-6 text-sm tracking-[-0.18px] leading-6 whitespace-nowrap"
+                className="font-medium text-primary-6 text-xs sm:text-sm tracking-[-0.18px] leading-6 whitespace-nowrap"
                 whileHover={{
                   scale: 1.05,
                   color: "#1890FF",
@@ -176,7 +176,7 @@ export const BackgroundSection = () => {
               </motion.span>
 
               <motion.h2
-                className="w-[588px] font-inter text-[#060b13] text-[44.2px] tracking-[-1.25px] leading-[57.6px]"
+                className="w-full font-inter text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] xl:w-[588px] tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1px] xl:tracking-[-1.25px] leading-tight sm:leading-[1.3] md:leading-[1.3] xl:leading-[57.6px]"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
@@ -199,192 +199,64 @@ export const BackgroundSection = () => {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-7 xl:gap-8 w-full">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="flex flex-col items-start gap-4 group cursor-pointer relative"
-                initial={{ opacity: 0, y: 40, rotateX: -20 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                className="flex flex-col items-start gap-3 sm:gap-4 group cursor-pointer relative p-2 sm:p-0"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.8,
-                  delay: index * 0.12,
+                  duration: 0.6,
+                  delay: index * 0.1,
                   ease: "easeOut",
                 }}
                 whileHover={{
-                  scale: 1.05,
-                  rotateY: 3,
-                  rotateX: 3,
-                  z: 50,
-                  transition: { duration: 0.4, ease: "easeOut" },
+                  scale: 1.02,
+                  y: -5,
+                  transition: { duration: 0.3, ease: "easeOut" },
                 }}
                 onMouseEnter={() => setHoveredFeature(index)}
                 onMouseLeave={() => setHoveredFeature(null)}
-                style={{
-                  transformStyle: "preserve-3d",
-                  perspective: "1000px",
-                }}
               >
-                {/* Enhanced holographic glow background */}
+                {/* Simple hover glow */}
                 <motion.div
-                  className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-40"
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20"
                   style={{
-                    background: `radial-gradient(circle at 50% 50%, ${
+                    background: `linear-gradient(135deg, ${
                       index === 0
-                        ? "rgba(59, 130, 246, 0.4)"
+                        ? "rgba(59, 130, 246, 0.3)"
                         : index === 1
-                        ? "rgba(16, 185, 129, 0.4)"
+                        ? "rgba(16, 185, 129, 0.3)"
                         : index === 2
-                        ? "rgba(139, 92, 246, 0.4)"
-                        : "rgba(249, 115, 22, 0.4)"
-                    }, transparent 70%)`,
-                    filter: "blur(20px)",
-                    transform: "translateZ(-15px)",
+                        ? "rgba(139, 92, 246, 0.3)"
+                        : "rgba(249, 115, 22, 0.3)"
+                    }, transparent)`,
                   }}
                   animate={{
-                    opacity: hoveredFeature === index ? 0.4 : 0,
-                    scale: hoveredFeature === index ? 1.2 : 1,
+                    opacity: hoveredFeature === index ? 0.2 : 0,
                   }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.3 }}
                 />
-
-                {/* Enhanced particle effects */}
-                {hoveredFeature === index &&
-                  [...Array(8)].map((_, i) => (
-                    <motion.div
-                      key={`card-particle-${index}-${i}`}
-                      className="absolute w-1.5 h-1.5 rounded-full opacity-0"
-                      style={{
-                        left: `${10 + i * 12}%`,
-                        top: `${5 + i * 15}%`,
-                        background:
-                          index === 0
-                            ? "#3b82f6"
-                            : index === 1
-                            ? "#10b981"
-                            : index === 2
-                            ? "#8b5cf6"
-                            : "#f97316",
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0, 0.8, 0],
-                        scale: [0.5, 1.2, 0.5],
-                        rotate: [0, 180, 360],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.15,
-                      }}
-                    />
-                  ))}
 
                 <motion.div
                   className="relative"
                   whileHover={{
-                    rotateY: 15,
-                    rotateX: 10,
-                    scale: 1.15,
+                    scale: 1.1,
+                    rotate: 5,
                   }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <Card className="rounded-[56px] w-11 h-11 bg-neutral-1 border border-solid border-[#e9ebf1] p-0 relative overflow-hidden group-hover:shadow-2xl transition-all duration-500">
-                    {/* Enhanced animated background shimmer */}
-                    <motion.div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: `linear-gradient(45deg, transparent 30%, ${
-                          index === 0
-                            ? "rgba(59, 130, 246, 0.3)"
-                            : index === 1
-                            ? "rgba(16, 185, 129, 0.3)"
-                            : index === 2
-                            ? "rgba(139, 92, 246, 0.3)"
-                            : "rgba(249, 115, 22, 0.3)"
-                        } 50%, transparent 70%)`,
-                        backgroundSize: "200% 200%",
-                      }}
-                      animate={{
-                        backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-
+                  <Card className="rounded-[56px] w-11 h-11 bg-neutral-1 border border-solid border-[#e9ebf1] p-0 relative overflow-hidden group-hover:shadow-lg transition-all duration-300">
                     <CardContent className="flex items-center justify-center p-0 relative z-10">
                       <motion.div
                         className="absolute top-3 left-3"
                         whileHover={{
-                          scale: 1.3,
-                          rotate: 360,
+                          scale: 1.2,
                         }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        animate={{
-                          scale: hoveredFeature === index ? [1, 1.1, 1] : 1,
-                        }}
-                        style={{
-                          filter:
-                            hoveredFeature === index
-                              ? `drop-shadow(0 0 12px ${
-                                  index === 0
-                                    ? "rgba(59, 130, 246, 0.8)"
-                                    : index === 1
-                                    ? "rgba(16, 185, 129, 0.8)"
-                                    : index === 2
-                                    ? "rgba(139, 92, 246, 0.8)"
-                                    : "rgba(249, 115, 22, 0.8)"
-                                })`
-                              : "drop-shadow(0 0 6px rgba(59, 130, 246, 0.4))",
-                        }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                       >
-                        <motion.div
-                          animate={{
-                            filter:
-                              hoveredFeature === index
-                                ? [
-                                    `drop-shadow(0 0 8px ${
-                                      index === 0
-                                        ? "rgba(59, 130, 246, 0.6)"
-                                        : index === 1
-                                        ? "rgba(16, 185, 129, 0.6)"
-                                        : index === 2
-                                        ? "rgba(139, 92, 246, 0.6)"
-                                        : "rgba(249, 115, 22, 0.6)"
-                                    })`,
-                                    `drop-shadow(0 0 16px ${
-                                      index === 0
-                                        ? "rgba(59, 130, 246, 0.9)"
-                                        : index === 1
-                                        ? "rgba(16, 185, 129, 0.9)"
-                                        : index === 2
-                                        ? "rgba(139, 92, 246, 0.9)"
-                                        : "rgba(249, 115, 22, 0.9)"
-                                    })`,
-                                    `drop-shadow(0 0 8px ${
-                                      index === 0
-                                        ? "rgba(59, 130, 246, 0.6)"
-                                        : index === 1
-                                        ? "rgba(16, 185, 129, 0.6)"
-                                        : index === 2
-                                        ? "rgba(139, 92, 246, 0.6)"
-                                        : "rgba(249, 115, 22, 0.6)"
-                                    })`,
-                                  ]
-                                : `drop-shadow(0 0 6px rgba(59, 130, 246, 0.4))`,
-                          }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: hoveredFeature === index ? Infinity : 0,
-                            ease: "easeInOut",
-                          }}
-                        >
-                          {feature.icon}
-                        </motion.div>
+                        {feature.icon}
                       </motion.div>
                     </CardContent>
                   </Card>
@@ -393,12 +265,12 @@ export const BackgroundSection = () => {
                 <motion.div
                   className="flex flex-col items-start gap-2"
                   whileHover={{
-                    x: 8,
+                    x: 3,
                     transition: { duration: 0.3, ease: "easeOut" },
                   }}
                 >
                   <motion.h3
-                    className="font-medium text-black text-xl leading-[30px] max-w-[275px] transition-colors duration-300"
+                    className="font-medium text-black text-lg sm:text-xl leading-[1.5] sm:leading-[30px] w-full sm:max-w-[275px] transition-colors duration-300"
                     style={{
                       color:
                         hoveredFeature === index
@@ -411,52 +283,20 @@ export const BackgroundSection = () => {
                             : "#f97316"
                           : "#000000",
                     }}
-                    whileHover={{
-                      scale: 1.03,
-                      transition: { duration: 0.2 },
-                    }}
                   >
                     {feature.title}
                   </motion.h3>
-                  <motion.p
-                    className="font-normal text-neutral-7 text-sm leading-[21px] max-w-[275px] group-hover:text-neutral-8 transition-colors duration-300"
-                    whileHover={{
-                      scale: 1.01,
-                      transition: { duration: 0.2 },
-                    }}
-                  >
+                  <motion.p className="font-normal text-neutral-7 text-sm leading-[1.5] sm:leading-[21px] w-full sm:max-w-[275px] group-hover:text-neutral-8 transition-colors duration-300">
                     {feature.description}
                   </motion.p>
                 </motion.div>
-
-                {/* Enhanced hover line indicator */}
-                <motion.div
-                  className="absolute left-0 top-0 w-1 h-full rounded-full"
-                  style={{
-                    background:
-                      index === 0
-                        ? "linear-gradient(to bottom, #3b82f6, #06b6d4)"
-                        : index === 1
-                        ? "linear-gradient(to bottom, #10b981, #14b8a6)"
-                        : index === 2
-                        ? "linear-gradient(to bottom, #8b5cf6, #a855f7)"
-                        : "linear-gradient(to bottom, #f97316, #ef4444)",
-                    transformOrigin: "top",
-                  }}
-                  initial={{ scaleY: 0 }}
-                  animate={{
-                    scaleY: hoveredFeature === index ? 1 : 0,
-                    opacity: hoveredFeature === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                />
               </motion.div>
             ))}
           </div>
         </div>
 
         <motion.div
-          className="relative w-[459px] h-[508px]"
+          className="relative w-full md:w-[350px] lg:w-[400px] xl:w-[459px] h-[300px] md:h-[380px] lg:h-[440px] xl:h-[508px] mx-auto xl:mx-0 mt-8 xl:mt-0"
           initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}
           animate={{ opacity: 1, scale: 1, rotateY: 0 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
@@ -540,7 +380,7 @@ export const BackgroundSection = () => {
           ))}
 
           <motion.div
-            className="relative w-[536px] h-[580px] bg-gradient-to-br from-[#eff7ff] via-[#f0f8ff] to-[#e6f3ff] rounded-[20px_20px_8px_8px] overflow-hidden"
+            className="relative w-full h-full md:w-[400px] md:h-[430px] lg:w-[470px] lg:h-[500px] xl:w-[536px] xl:h-[580px] bg-gradient-to-br from-[#eff7ff] via-[#f0f8ff] to-[#e6f3ff] rounded-[16px] md:rounded-[18px] xl:rounded-[20px_20px_8px_8px] overflow-hidden"
             style={{
               transformStyle: "preserve-3d",
               perspective: "2000px",
@@ -550,9 +390,9 @@ export const BackgroundSection = () => {
                 linear-gradient(135deg, #eff7ff, #f0f8ff, #e6f3ff)
               `,
               boxShadow: `
-                0 0 60px rgba(24, 144, 255, 0.2),
+                0 0 40px rgba(24, 144, 255, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                0 20px 40px rgba(0, 0, 0, 0.1)
+                0 10px 30px rgba(0, 0, 0, 0.08)
               `,
             }}
             animate={{
@@ -626,11 +466,11 @@ export const BackgroundSection = () => {
               />
             ))}
 
-            {/* Phone 2 with magnetic field interaction */}
+            {/* Phone 2 with responsive magnetic field interaction */}
             <motion.img
               src="/Phone2.png"
               alt="Phone interface showing medical app"
-              className="absolute w-[280px] h-[560px] top-[-5px] left-[190px] object-cover object-center z-10 mt-[20px]"
+              className="absolute w-[200px] h-[400px] md:w-[220px] md:h-[440px] lg:w-[250px] lg:h-[500px] xl:w-[280px] xl:h-[560px] top-[-5px] md:top-[-5px] lg:top-[-5px] xl:top-[-5px] left-[140px] md:left-[150px] lg:left-[170px] xl:left-[190px] object-cover object-center z-10 mt-[15px] md:mt-[18px] xl:mt-[20px]"
               style={{
                 transformStyle: "preserve-3d",
                 rotateX: phone2RotateX,
@@ -638,8 +478,8 @@ export const BackgroundSection = () => {
                 x: phone2X,
                 y: phone2Y,
                 filter: `
-                  drop-shadow(0 20px 40px rgba(0,0,0,0.15))
-                  drop-shadow(0 0 20px rgba(24, 144, 255, 0.3))
+                  drop-shadow(0 15px 30px rgba(0,0,0,0.12))
+                  drop-shadow(0 0 15px rgba(24, 144, 255, 0.25))
                   brightness(${isHovered ? 1.1 : 1})
                   contrast(${isHovered ? 1.05 : 1})
                 `,
@@ -680,11 +520,11 @@ export const BackgroundSection = () => {
               }}
             />
 
-            {/* Phone 1 with enhanced magnetic interaction */}
+            {/* Phone 1 with responsive enhanced magnetic interaction */}
             <motion.img
               src="/Phone1.png"
               alt="Phone interface showing medical features"
-              className="absolute w-[330px] h-[440px] top-[150px] left-[20px] object-cover object-center z-20 shadow-lg"
+              className="absolute w-[240px] h-[320px] md:w-[260px] md:h-[350px] lg:w-[290px] lg:h-[390px] xl:w-[330px] xl:h-[440px] top-[110px] md:top-[120px] lg:top-[135px] xl:top-[150px] left-[15px] md:left-[18px] xl:left-[20px] object-cover object-center z-20 shadow-lg"
               style={{
                 transformStyle: "preserve-3d",
                 rotateX: phone1RotateX,
@@ -692,8 +532,8 @@ export const BackgroundSection = () => {
                 x: phone1X,
                 y: phone1Y,
                 filter: `
-                  drop-shadow(0 25px 50px rgba(0,0,0,0.25))
-                  drop-shadow(0 0 30px rgba(15, 115, 255, 0.4))
+                  drop-shadow(0 20px 40px rgba(0,0,0,0.2))
+                  drop-shadow(0 0 25px rgba(15, 115, 255, 0.3))
                   brightness(${isHovered ? 1.15 : 1})
                   contrast(${isHovered ? 1.1 : 1})
                   saturate(${isHovered ? 1.1 : 1})
@@ -735,9 +575,9 @@ export const BackgroundSection = () => {
               }}
             />
 
-            {/* Holographic overlay */}
+            {/* Responsive holographic overlay */}
             <motion.div
-              className="absolute inset-0 rounded-[20px_20px_8px_8px] pointer-events-none"
+              className="absolute inset-0 rounded-[16px] md:rounded-[18px] xl:rounded-[20px_20px_8px_8px] pointer-events-none"
               style={{
                 background: `
                   linear-gradient(45deg, 

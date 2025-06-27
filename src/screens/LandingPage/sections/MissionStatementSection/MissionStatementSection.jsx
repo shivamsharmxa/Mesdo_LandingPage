@@ -79,10 +79,10 @@ export const MissionStatementSection = () => {
       background="white"
       className="flex flex-col items-center justify-center relative overflow-hidden"
     >
-      {/* Subtle background elements */}
+      {/* Responsive subtle background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-32 h-32 bg-blue-50 rounded-full blur-3xl opacity-40"
+          className="absolute top-10 sm:top-16 md:top-20 left-4 sm:left-8 md:left-10 w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-blue-50 rounded-full blur-3xl opacity-40"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.4, 0.2],
@@ -94,7 +94,7 @@ export const MissionStatementSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-40 h-40 bg-purple-50 rounded-full blur-3xl opacity-30"
+          className="absolute bottom-10 sm:bottom-16 md:bottom-20 right-4 sm:right-8 md:right-10 w-24 h-24 sm:w-36 sm:h-36 md:w-40 md:h-40 bg-purple-50 rounded-full blur-3xl opacity-30"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.15, 0.3, 0.15],
@@ -109,17 +109,17 @@ export const MissionStatementSection = () => {
       </div>
 
       <motion.div
-        className="flex flex-col items-center gap-12 max-w-5xl mx-auto text-center relative z-10"
+        className="flex flex-col items-center gap-8 sm:gap-10 md:gap-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={containerVariants}
       >
-        <div className="flex flex-col items-center gap-6">
-          {/* Animated Badge */}
+        <div className="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
+          {/* Responsive Animated Badge */}
           <motion.div variants={badgeVariants}>
             <motion.span
-              className="text-sm font-medium text-primary-600 tracking-wide uppercase relative"
+              className="text-xs sm:text-sm font-medium text-primary-600 tracking-wide uppercase relative min-h-[44px] min-w-[44px] flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
@@ -129,21 +129,21 @@ export const MissionStatementSection = () => {
                 whileHover={{ opacity: 0.6, scale: 1.2 }}
                 transition={{ duration: 0.3 }}
               />
-              <span className="relative px-4 py-2 rounded-full">
+              <span className="relative px-3 py-2 sm:px-4 sm:py-2 rounded-full">
                 Mesdo's Mission
               </span>
             </motion.span>
           </motion.div>
 
-          {/* Animated Title with Word-by-Word Animation */}
+          {/* Responsive Animated Title with Word-by-Word Animation */}
           <motion.h2
-            className="font-inter text-gray-900 text-3xl md:text-4xl lg:text-5xl leading-tight max-w-4xl tracking-tight"
+            className="font-inter text-gray-900 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight max-w-5xl tracking-tight"
             variants={titleVariants}
           >
             {words.map((word, index) => (
               <motion.span
                 key={index}
-                className="inline-block mr-2"
+                className="inline-block mr-1 sm:mr-2"
                 initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
                 whileInView={{
                   opacity: 1,
@@ -186,7 +186,7 @@ export const MissionStatementSection = () => {
           </motion.h2>
         </div>
 
-        {/* Enhanced Button with Advanced Animations */}
+        {/* Responsive Enhanced Button with Advanced Animations */}
         <motion.div variants={buttonVariants}>
           <motion.div
             whileHover={{ scale: 1.05, y: -2 }}
@@ -194,10 +194,10 @@ export const MissionStatementSection = () => {
             transition={{ duration: 0.2 }}
           >
             <Button
-              className="group relative text-white font-medium overflow-hidden border-0"
+              className="group relative text-white font-medium overflow-hidden border-0 min-h-[44px] min-w-[44px]"
               style={{
-                width: "160px",
-                height: "52px",
+                width: "clamp(140px, 40vw, 160px)",
+                height: "clamp(44px, 12vw, 52px)",
                 borderRadius: "8px",
                 background: "linear-gradient(180deg, #0F73FF 0%, #1890FF 100%)",
                 padding: "0",
@@ -233,9 +233,10 @@ export const MissionStatementSection = () => {
                 }}
               />
 
-              {/* Button content */}
-              <div className="relative flex items-center gap-2 z-10">
+              {/* Responsive Button content */}
+              <div className="relative flex items-center gap-1.5 sm:gap-2 z-10">
                 <motion.span
+                  className="text-sm sm:text-base"
                   initial={{ x: 0 }}
                   whileHover={{ x: -2 }}
                   transition={{ duration: 0.2 }}
@@ -250,7 +251,7 @@ export const MissionStatementSection = () => {
                   }}
                   transition={{ duration: 0.2 }}
                 >
-                  <ArrowRightIcon className="w-5 h-5" />
+                  <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.div>
               </div>
 
@@ -277,9 +278,9 @@ export const MissionStatementSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Floating decorative elements */}
+        {/* Responsive floating decorative elements */}
         <motion.div
-          className="absolute -top-4 -right-4 w-2 h-2 bg-blue-400 rounded-full opacity-60"
+          className="absolute -top-2 sm:-top-3 md:-top-4 -right-2 sm:-right-3 md:-right-4 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-400 rounded-full opacity-60"
           animate={{
             y: [-10, 10, -10],
             x: [-5, 5, -5],
@@ -293,7 +294,7 @@ export const MissionStatementSection = () => {
         />
 
         <motion.div
-          className="absolute -bottom-6 -left-6 w-3 h-3 bg-purple-400 rounded-full opacity-40"
+          className="absolute -bottom-4 sm:-bottom-5 md:-bottom-6 -left-4 sm:-left-5 md:-left-6 w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 bg-purple-400 rounded-full opacity-40"
           animate={{
             y: [15, -15, 15],
             x: [8, -8, 8],
@@ -308,7 +309,7 @@ export const MissionStatementSection = () => {
         />
 
         <motion.div
-          className="absolute top-1/2 -left-8 w-1 h-1 bg-green-400 rounded-full opacity-70"
+          className="absolute top-1/2 -left-4 sm:-left-6 md:-left-8 w-0.5 h-0.5 sm:w-1 sm:h-1 bg-green-400 rounded-full opacity-70"
           animate={{
             rotate: [0, 360],
             scale: [1, 1.5, 1],
@@ -317,6 +318,35 @@ export const MissionStatementSection = () => {
             duration: 6,
             repeat: Infinity,
             ease: "linear",
+          }}
+        />
+
+        {/* Additional responsive floating elements for better visual balance */}
+        <motion.div
+          className="absolute top-1/4 right-4 sm:right-6 md:right-8 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-yellow-400 rounded-full opacity-50"
+          animate={{
+            y: [-8, 8, -8],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-1/4 left-4 sm:left-6 md:left-8 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-pink-400 rounded-full opacity-60"
+          animate={{
+            x: [-6, 6, -6],
+            scale: [0.8, 1.2, 0.8],
+          }}
+          transition={{
+            duration: 4.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
           }}
         />
       </motion.div>

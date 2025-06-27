@@ -414,16 +414,16 @@ export const BenefitsSection = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-center gap-20 pt-[150px] pb-[200px] px-0 relative self-stretch w-full flex-[0_0_auto] overflow-hidden bg-gradient-to-b from-gray-50/50 to-white"
+      className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20 pt-[80px] sm:pt-[120px] md:pt-[150px] pb-[120px] sm:pb-[160px] md:pb-[200px] px-4 sm:px-6 lg:px-8 relative self-stretch w-full flex-[0_0_auto] overflow-hidden bg-gradient-to-b from-gray-50/50 to-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
     >
-      {/* Enhanced background elements */}
+      {/* Enhanced responsive background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-40 h-40 bg-blue-100/60 rounded-full blur-3xl"
+          className="absolute top-10 sm:top-16 md:top-20 left-4 sm:left-8 md:left-10 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-blue-100/60 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -435,7 +435,7 @@ export const BenefitsSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-32 h-32 bg-purple-100/60 rounded-full blur-3xl"
+          className="absolute bottom-10 sm:bottom-16 md:bottom-20 right-4 sm:right-8 md:right-10 w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-purple-100/60 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.4, 1],
             opacity: [0.2, 0.5, 0.2],
@@ -448,10 +448,10 @@ export const BenefitsSection = () => {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-100/40 rounded-full blur-2xl"
+          className="absolute top-1/2 left-1/4 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-green-100/40 rounded-full blur-2xl"
           animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
             scale: [1, 1.2, 1],
           }}
           transition={{
@@ -463,15 +463,15 @@ export const BenefitsSection = () => {
         />
       </div>
 
-      <div className="inline-flex flex-col items-center gap-20 relative flex-[0_0_auto] z-10">
-        {/* Enhanced Header Section */}
+      <div className="inline-flex flex-col items-center gap-12 sm:gap-16 md:gap-20 relative flex-[0_0_auto] z-10 max-w-7xl mx-auto">
+        {/* Enhanced responsive header section */}
         <motion.div
-          className="inline-flex flex-col items-center gap-5 relative flex-[0_0_auto]"
+          className="inline-flex flex-col items-center gap-4 sm:gap-5 relative flex-[0_0_auto]"
           variants={sectionVariants}
         >
-          <div className="inline-flex flex-col items-center gap-[17px] relative flex-[0_0_auto]">
+          <div className="inline-flex flex-col items-center gap-3 sm:gap-4 md:gap-[17px] relative flex-[0_0_auto]">
             <motion.p
-              className="relative self-stretch mt-[-1.00px] font-normal text-primary-6 text-sm text-center tracking-[0.56px] leading-[normal] font-['Inter',Helvetica]"
+              className="relative self-stretch mt-[-1.00px] font-normal text-primary-6 text-xs sm:text-sm text-center tracking-[0.56px] leading-[normal] font-['Inter',Helvetica]"
               whileHover={{ scale: 1.05, color: "#1890FF" }}
               transition={{ duration: 0.2 }}
             >
@@ -479,7 +479,7 @@ export const BenefitsSection = () => {
             </motion.p>
 
             <motion.h2
-              className="relative w-[622px] font-medium text-[#060b13] text-[44.2px] text-center tracking-[-1.25px] leading-[57.6px] font-['Inter',Helvetica]"
+              className="relative w-full max-w-[622px] font-medium text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] text-center tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1.25px] leading-tight sm:leading-[1.3] md:leading-[57.6px] font-['Inter',Helvetica] px-4 sm:px-6 md:px-0"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -505,7 +505,7 @@ export const BenefitsSection = () => {
             className="inline-flex flex-col items-center justify-center gap-4 relative flex-[0_0_auto]"
             variants={sectionVariants}
           >
-            <p className="relative w-[944px] font-normal text-neutral-9 text-lg text-center tracking-[0] leading-[27px] font-['Inter',Helvetica]">
+            <p className="relative w-full max-w-[944px] font-normal text-neutral-9 text-sm sm:text-base md:text-lg text-center tracking-[0] leading-relaxed sm:leading-[1.5] md:leading-[27px] font-['Inter',Helvetica] px-4 sm:px-6 md:px-0">
               No trusted network. No verified identity. No space to grow. For
               years, doctors, nurses, and AHPs have been navigating their
               careers without a platform built just for them.
@@ -513,152 +513,498 @@ export const BenefitsSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Enhanced Main Content Section */}
+        {/* Enhanced responsive main content section */}
         <motion.div
-          className="relative w-[1200px] h-[535px]"
+          className="relative w-full max-w-[1200px] mx-auto"
           variants={sectionVariants}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Enhanced Navigation Buttons */}
-          <motion.button
-            onClick={handlePrevious}
-            disabled={isLoading}
-            className="absolute w-16 h-16 top-[240px] left-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            aria-label="Previous profile"
-            type="button"
-          >
-            <motion.div variants={iconVariants} whileHover="hover">
-              <ChevronLeftIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
-            </motion.div>
-
-            {/* Loading indicator */}
-            {isLoading && (
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
-            )}
-          </motion.button>
-
-          <motion.button
-            onClick={handleNext}
-            disabled={isLoading}
-            className="absolute w-16 h-16 top-[240px] right-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            aria-label="Next profile"
-            type="button"
-          >
-            <motion.div variants={iconVariants} whileHover="hover">
-              <ChevronRightIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
-            </motion.div>
-
-            {/* Loading indicator */}
-            {isLoading && (
-              <motion.div
-                className="absolute inset-0 bg-blue-500/20 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
-            )}
-          </motion.button>
-
-          {/* Enhanced Central Profile Card */}
-          <AnimatePresence mode="wait" custom={direction}>
+          {/* Desktop layout - original code structure for xl: and above */}
+          <div className="hidden xl:block">
             <motion.div
-              key={currentProfile.id}
-              custom={direction}
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              layout="preserve"
-              transition={{
-                x: {
-                  type: "spring",
-                  stiffness: 140,
-                  damping: 25,
-                  mass: 0.8,
-                },
-                opacity: {
-                  duration: 0.3,
-                  ease: "easeInOut",
-                },
-                scale: {
-                  duration: 0.3,
-                  ease: "easeInOut",
-                },
-                rotateY: {
-                  duration: 0.4,
-                  ease: "easeInOut",
-                },
-                filter: {
-                  duration: 0.3,
-                  ease: "easeInOut",
-                },
-              }}
-              className="absolute w-[342px] h-[535px] top-0 left-[429px]"
-              style={{ willChange: "transform, opacity" }}
+              className="relative w-[1200px] h-[535px]"
+              variants={sectionVariants}
             >
-              <Card className="w-full h-full bg-white rounded-[20px] shadow-[0px_1px_92px_#bb22f705,1px_4px_204px_82px_#1890ff26] border border-gray-100">
-                <CardContent className="p-0">
-                  {/* Enhanced Profile Image */}
-                  <motion.div
-                    className="absolute w-[294px] h-[200px] top-6 left-6 rounded-2xl border-2 border-gray-100 shadow-lg overflow-hidden"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <motion.div
-                      className="w-full h-full relative"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.2, duration: 0.6 }}
-                    >
-                      {/* Gradient overlay */}
-                      <motion.div
-                        className={`absolute inset-0 bg-gradient-to-br ${currentProfile.color} opacity-0 z-10`}
-                        whileHover={{ opacity: 0.1 }}
-                        transition={{ duration: 0.3 }}
-                      />
+              {/* Enhanced Navigation Buttons */}
+              <motion.button
+                onClick={handlePrevious}
+                disabled={isLoading}
+                className="absolute w-16 h-16 top-[240px] left-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Previous profile"
+                type="button"
+              >
+                <motion.div variants={iconVariants} whileHover="hover">
+                  <ChevronLeftIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                </motion.div>
 
-                      {currentProfile.image ? (
-                        <div className="relative w-full h-full">
-                          <motion.img
-                            src={currentProfile.image}
-                            alt={currentProfile.name}
-                            className="w-full h-full object-cover"
-                            whileHover={{ scale: 1.05 }}
+                {/* Loading indicator */}
+                {isLoading && (
+                  <motion.div
+                    className="absolute inset-0 bg-blue-500/20 rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </motion.button>
+
+              <motion.button
+                onClick={handleNext}
+                disabled={isLoading}
+                className="absolute w-16 h-16 top-[240px] right-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Next profile"
+                type="button"
+              >
+                <motion.div variants={iconVariants} whileHover="hover">
+                  <ChevronRightIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                </motion.div>
+
+                {/* Loading indicator */}
+                {isLoading && (
+                  <motion.div
+                    className="absolute inset-0 bg-blue-500/20 rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </motion.button>
+
+              {/* Enhanced Central Profile Card */}
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentProfile.id}
+                  custom={direction}
+                  variants={cardVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  layout="preserve"
+                  transition={{
+                    x: {
+                      type: "spring",
+                      stiffness: 140,
+                      damping: 25,
+                      mass: 0.8,
+                    },
+                    opacity: {
+                      duration: 0.3,
+                      ease: "easeInOut",
+                    },
+                    scale: {
+                      duration: 0.3,
+                      ease: "easeInOut",
+                    },
+                    rotateY: {
+                      duration: 0.4,
+                      ease: "easeInOut",
+                    },
+                    filter: {
+                      duration: 0.3,
+                      ease: "easeInOut",
+                    },
+                  }}
+                  className="absolute w-[342px] h-[535px] top-0 left-[429px]"
+                  style={{ willChange: "transform, opacity" }}
+                >
+                  <Card className="w-full h-full bg-white rounded-[20px] shadow-[0px_1px_92px_#bb22f705,1px_4px_204px_82px_#1890ff26] border border-gray-100">
+                    <CardContent className="p-0">
+                      {/* Enhanced Profile Image */}
+                      <motion.div
+                        className="absolute w-[294px] h-[200px] top-6 left-6 rounded-2xl border-2 border-gray-100 shadow-lg overflow-hidden"
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 20,
+                        }}
+                      >
+                        <motion.div
+                          className="w-full h-full relative"
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.2, duration: 0.6 }}
+                        >
+                          {/* Gradient overlay */}
+                          <motion.div
+                            className={`absolute inset-0 bg-gradient-to-br ${currentProfile.color} opacity-0 z-10`}
+                            whileHover={{ opacity: 0.1 }}
                             transition={{ duration: 0.3 }}
-                            onLoad={(e) => {
-                              console.log(
-                                `Successfully loaded image: ${currentProfile.image}`
-                              );
-                            }}
-                            onError={(e) => {
-                              console.error(
-                                `Failed to load image: ${currentProfile.image}`
-                              );
-                              e.target.style.display = "none";
-                              e.target.nextSibling.style.display = "flex";
-                            }}
                           />
-                          {/* Enhanced Fallback */}
+
+                          {currentProfile.image ? (
+                            <div className="relative w-full h-full">
+                              <motion.img
+                                src={currentProfile.image}
+                                alt={currentProfile.name}
+                                className="w-full h-full object-cover"
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.3 }}
+                                onLoad={(e) => {
+                                  console.log(
+                                    `Successfully loaded image: ${currentProfile.image}`
+                                  );
+                                }}
+                                onError={(e) => {
+                                  console.error(
+                                    `Failed to load image: ${currentProfile.image}`
+                                  );
+                                  e.target.style.display = "none";
+                                  e.target.nextSibling.style.display = "flex";
+                                }}
+                              />
+                              {/* Enhanced Fallback */}
+                              <div
+                                className={`absolute inset-0 bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
+                                style={{ display: "none" }}
+                              >
+                                <motion.div
+                                  className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
+                                  whileHover={{ rotate: 360, scale: 1.1 }}
+                                  transition={{ duration: 0.8 }}
+                                >
+                                  <span className="text-2xl font-bold text-gray-700">
+                                    {currentProfile.name
+                                      .split(" ")
+                                      .map((n) => n[0])
+                                      .join("")}
+                                  </span>
+                                </motion.div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div
+                              className={`w-full h-full bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
+                            >
+                              <motion.div
+                                className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
+                                whileHover={{ rotate: 360, scale: 1.1 }}
+                                transition={{ duration: 0.8 }}
+                              >
+                                <span className="text-2xl font-bold text-gray-700">
+                                  {currentProfile.name
+                                    .split(" ")
+                                    .map((n) => n[0])
+                                    .join("")}
+                                </span>
+                              </motion.div>
+                            </div>
+                          )}
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Enhanced Profile Content */}
+                      <motion.div
+                        className="flex flex-col w-[286px] items-start gap-8 absolute top-[248px] left-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: 0.15,
+                          duration: 0.4,
+                          ease: "easeOut",
+                        }}
+                      >
+                        <motion.div
+                          className="relative w-fit mt-[-1.00px] font-['Inter',Helvetica] font-normal text-transparent text-base tracking-[0] leading-4"
+                          initial={{ opacity: 0, x: -15 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            delay: 0.2,
+                            duration: 0.3,
+                            ease: "easeOut",
+                          }}
+                          whileHover={{ x: 3 }}
+                        >
+                          <motion.span
+                            className="font-medium text-[#141414] leading-[28.8px] block"
+                            whileHover={{ color: "#1890FF" }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {currentProfile.name}
+                          </motion.span>
+                          <span className="text-[#595959] text-xs leading-[21.6px]">
+                            {currentProfile.title}
+                          </span>
+                        </motion.div>
+
+                        <div className="flex flex-col items-start gap-6 relative self-stretch w-full flex-[0_0_auto]">
+                          <motion.div
+                            className="flex gap-3 self-stretch w-full flex-col items-start relative flex-[0_0_auto]"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              delay: 0.25,
+                              duration: 0.3,
+                              ease: "easeOut",
+                            }}
+                            whileHover={{ x: 2 }}
+                          >
+                            <div className="relative self-stretch mt-[-1.00px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] font-['Inter',Helvetica] font-medium text-transparent text-base tracking-[0] leading-4">
+                              Backstory
+                            </div>
+                            <div className="relative w-[278px] font-['Inter',Helvetica] font-normal text-neutral-8 text-xs tracking-[0] leading-[16.8px]">
+                              {currentProfile.backstory}
+                            </div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex gap-3 self-stretch w-full flex-col items-start relative flex-[0_0_auto]"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              delay: 0.3,
+                              duration: 0.3,
+                              ease: "easeOut",
+                            }}
+                            whileHover={{ x: 2 }}
+                          >
+                            <div className="relative self-stretch mt-[-1.00px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] font-['Inter',Helvetica] font-medium text-transparent text-base tracking-[0] leading-4">
+                              Current Struggle / Goal
+                            </div>
+                            <div className="relative w-[278px] font-['Inter',Helvetica] font-normal text-neutral-8 text-xs tracking-[0] leading-[16.8px]">
+                              {currentProfile.currentStruggle}
+                            </div>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Enhanced Challenge Cards */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`challenges-${currentProfile.id}`}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {currentProfile.challenges.map((card, index) => {
+                    const IconComponent = card.icon;
+                    return (
+                      <motion.div
+                        key={`challenge-card-${currentProfile.id}-${index}`}
+                        className={`inline-flex flex-col items-start gap-4 absolute ${card.position} cursor-pointer`}
+                        custom={index}
+                        variants={challengeCardVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                      >
+                        <motion.div
+                          className={`relative w-12 h-12 ${card.color} rounded-xl overflow-hidden border-2 shadow-md group`}
+                          whileHover={{
+                            boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                            borderColor: card.iconColor.replace(
+                              "bg-",
+                              "border-"
+                            ),
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          <motion.div
+                            className={`absolute inset-0 ${card.iconColor} rounded-lg m-1 flex items-center justify-center`}
+                            variants={challengeIconVariants}
+                            initial="initial"
+                            whileHover="hover"
+                          >
+                            <IconComponent className="w-5 h-5 text-white" />
+                          </motion.div>
+                        </motion.div>
+
+                        <motion.div
+                          className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-black text-xl tracking-[0] leading-7"
+                          whileHover={{ x: 3, color: "#1890FF" }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          {card.title}
+                        </motion.div>
+
+                        <motion.div
+                          className="relative w-[280px] [font-family:'Inter',Helvetica] font-normal text-neutral-7 text-base tracking-[0] leading-6"
+                          whileHover={{ x: 3 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          {card.description}
+                        </motion.div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
+
+          {/* Tablet and mobile layout - for screens smaller than 1280px */}
+          <div className="block xl:hidden">
+            {/* Navigation buttons */}
+            <div className="flex justify-between items-center mb-6 px-4">
+              <motion.button
+                onClick={handlePrevious}
+                disabled={isLoading}
+                className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] min-w-[44px]"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Previous profile"
+                type="button"
+              >
+                <motion.div variants={iconVariants} whileHover="hover">
+                  <ChevronLeftIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                </motion.div>
+
+                {isLoading && (
+                  <motion.div
+                    className="absolute inset-0 bg-blue-500/20 rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </motion.button>
+
+              <motion.button
+                onClick={handleNext}
+                disabled={isLoading}
+                className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] min-w-[44px]"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Next profile"
+                type="button"
+              >
+                <motion.div variants={iconVariants} whileHover="hover">
+                  <ChevronRightIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                </motion.div>
+
+                {isLoading && (
+                  <motion.div
+                    className="absolute inset-0 bg-blue-500/20 rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </motion.button>
+            </div>
+
+            {/* Tablet/Mobile profile card */}
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={`tablet-mobile-${currentProfile.id}`}
+                custom={direction}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: {
+                    type: "spring",
+                    stiffness: 140,
+                    damping: 25,
+                    mass: 0.8,
+                  },
+                  opacity: {
+                    duration: 0.3,
+                    ease: "easeInOut",
+                  },
+                  scale: {
+                    duration: 0.3,
+                    ease: "easeInOut",
+                  },
+                }}
+                className="mx-4 mb-8"
+              >
+                <Card className="w-full bg-white rounded-xl shadow-lg border border-gray-100 max-w-md mx-auto md:max-w-lg">
+                  <CardContent className="p-6">
+                    {/* Tablet/Mobile profile image */}
+                    <motion.div
+                      className="w-full h-48 sm:h-56 md:h-64 rounded-xl border-2 border-gray-100 shadow-lg overflow-hidden mb-6"
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <motion.div
+                        className="w-full h-full relative"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                      >
+                        {currentProfile.image ? (
+                          <div className="relative w-full h-full">
+                            <motion.img
+                              src={currentProfile.image}
+                              alt={currentProfile.name}
+                              className="w-full h-full object-cover"
+                              whileHover={{ scale: 1.05 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                            {/* Tablet/Mobile fallback */}
+                            <div
+                              className={`absolute inset-0 bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
+                              style={{ display: "none" }}
+                            >
+                              <motion.div
+                                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
+                                whileHover={{ rotate: 360, scale: 1.1 }}
+                                transition={{ duration: 0.8 }}
+                              >
+                                <span className="text-lg sm:text-xl font-bold text-gray-700">
+                                  {currentProfile.name
+                                    .split(" ")
+                                    .map((n) => n[0])
+                                    .join("")}
+                                </span>
+                              </motion.div>
+                            </div>
+                          </div>
+                        ) : (
                           <div
-                            className={`absolute inset-0 bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
-                            style={{ display: "none" }}
+                            className={`w-full h-full bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
                           >
                             <motion.div
-                              className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
+                              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
                               whileHover={{ rotate: 360, scale: 1.1 }}
                               transition={{ duration: 0.8 }}
                             >
-                              <span className="text-2xl font-bold text-gray-700">
+                              <span className="text-lg sm:text-xl font-bold text-gray-700">
                                 {currentProfile.name
                                   .split(" ")
                                   .map((n) => n[0])
@@ -666,61 +1012,44 @@ export const BenefitsSection = () => {
                               </span>
                             </motion.div>
                           </div>
-                        </div>
-                      ) : (
-                        <div
-                          className={`w-full h-full bg-gradient-to-br ${currentProfile.color} flex items-center justify-center`}
-                        >
-                          <motion.div
-                            className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center backdrop-blur-sm"
-                            whileHover={{ rotate: 360, scale: 1.1 }}
-                            transition={{ duration: 0.8 }}
-                          >
-                            <span className="text-2xl font-bold text-gray-700">
-                              {currentProfile.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </span>
-                          </motion.div>
-                        </div>
-                      )}
+                        )}
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
 
-                  {/* Enhanced Profile Content */}
-                  <motion.div
-                    className="flex flex-col w-[286px] items-start gap-8 absolute top-[248px] left-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15, duration: 0.4, ease: "easeOut" }}
-                  >
+                    {/* Tablet/Mobile profile content */}
                     <motion.div
-                      className="relative w-fit mt-[-1.00px] font-['Inter',Helvetica] font-normal text-transparent text-base tracking-[0] leading-4"
-                      initial={{ opacity: 0, x: -15 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      className="space-y-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.2,
-                        duration: 0.3,
+                        delay: 0.15,
+                        duration: 0.4,
                         ease: "easeOut",
                       }}
-                      whileHover={{ x: 3 }}
                     >
-                      <motion.span
-                        className="font-medium text-[#141414] leading-[28.8px] block"
-                        whileHover={{ color: "#1890FF" }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {currentProfile.name}
-                      </motion.span>
-                      <span className="text-[#595959] text-xs leading-[21.6px]">
-                        {currentProfile.title}
-                      </span>
-                    </motion.div>
-
-                    <div className="flex flex-col items-start gap-6 relative self-stretch w-full flex-[0_0_auto]">
                       <motion.div
-                        className="flex gap-3 self-stretch w-full flex-col items-start relative flex-[0_0_auto]"
+                        initial={{ opacity: 0, x: -15 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          delay: 0.2,
+                          duration: 0.3,
+                          ease: "easeOut",
+                        }}
+                      >
+                        <motion.h3
+                          className="font-medium text-[#141414] text-lg sm:text-xl md:text-2xl leading-tight"
+                          whileHover={{ color: "#1890FF" }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {currentProfile.name}
+                        </motion.h3>
+                        <p className="text-[#595959] text-sm sm:text-base leading-relaxed">
+                          {currentProfile.title}
+                        </p>
+                      </motion.div>
+
+                      <motion.div
+                        className="space-y-4 sm:space-y-5"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
@@ -728,124 +1057,120 @@ export const BenefitsSection = () => {
                           duration: 0.3,
                           ease: "easeOut",
                         }}
-                        whileHover={{ x: 2 }}
                       >
-                        <div className="relative self-stretch mt-[-1.00px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] font-['Inter',Helvetica] font-medium text-transparent text-base tracking-[0] leading-4">
-                          Backstory
+                        <div>
+                          <h4 className="bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] font-medium text-sm sm:text-base mb-2">
+                            Backstory
+                          </h4>
+                          <p className="text-neutral-8 text-sm sm:text-base leading-relaxed">
+                            {currentProfile.backstory}
+                          </p>
                         </div>
-                        <div className="relative w-[278px] font-['Inter',Helvetica] font-normal text-neutral-8 text-xs tracking-[0] leading-[16.8px]">
-                          {currentProfile.backstory}
+
+                        <div>
+                          <h4 className="bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] font-medium text-sm sm:text-base mb-2">
+                            Current Struggle / Goal
+                          </h4>
+                          <p className="text-neutral-8 text-sm sm:text-base leading-relaxed">
+                            {currentProfile.currentStruggle}
+                          </p>
                         </div>
                       </motion.div>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </AnimatePresence>
 
+            {/* Tablet/Mobile challenge cards */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`tablet-mobile-challenges-${currentProfile.id}`}
+                className="px-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                  {currentProfile.challenges.map((card, index) => {
+                    const IconComponent = card.icon;
+                    return (
                       <motion.div
-                        className="flex gap-3 self-stretch w-full flex-col items-start relative flex-[0_0_auto]"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: 0.3,
-                          duration: 0.3,
-                          ease: "easeOut",
-                        }}
-                        whileHover={{ x: 2 }}
-                      >
-                        <div className="relative self-stretch mt-[-1.00px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] font-['Inter',Helvetica] font-medium text-transparent text-base tracking-[0] leading-4">
-                          Current Struggle / Goal
-                        </div>
-                        <div className="relative w-[278px] font-['Inter',Helvetica] font-normal text-neutral-8 text-xs tracking-[0] leading-[16.8px]">
-                          {currentProfile.currentStruggle}
-                        </div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Enhanced Challenge Cards */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`challenges-${currentProfile.id}`}
-              className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {currentProfile.challenges.map((card, index) => {
-                const IconComponent = card.icon;
-                return (
-                  <motion.div
-                    key={`challenge-card-${currentProfile.id}-${index}`}
-                    className={`inline-flex flex-col items-start gap-4 absolute ${card.position} cursor-pointer`}
-                    custom={index}
-                    variants={challengeCardVariants}
-                    initial="hidden"
-                    animate="visible"
-                    whileHover="hover"
-                  >
-                    <motion.div
-                      className={`relative w-12 h-12 ${card.color} rounded-xl overflow-hidden border-2 shadow-md group`}
-                      whileHover={{
-                        boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-                        borderColor: card.iconColor.replace("bg-", "border-"),
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      <motion.div
-                        className={`absolute inset-0 ${card.iconColor} rounded-lg m-1 flex items-center justify-center`}
-                        variants={challengeIconVariants}
-                        initial="initial"
+                        key={`tablet-mobile-challenge-${currentProfile.id}-${index}`}
+                        className="flex flex-col items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-white rounded-xl border border-gray-100 shadow-md cursor-pointer"
+                        custom={index}
+                        variants={challengeCardVariants}
+                        initial="hidden"
+                        animate="visible"
                         whileHover="hover"
                       >
-                        <IconComponent className="w-5 h-5 text-white" />
+                        <motion.div
+                          className={`relative w-10 h-10 sm:w-12 sm:h-12 ${card.color} rounded-xl overflow-hidden border-2 shadow-md group min-h-[44px] min-w-[44px]`}
+                          whileHover={{
+                            boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                            borderColor: card.iconColor.replace(
+                              "bg-",
+                              "border-"
+                            ),
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          <motion.div
+                            className={`absolute inset-0 ${card.iconColor} rounded-lg m-1 flex items-center justify-center`}
+                            variants={challengeIconVariants}
+                            initial="initial"
+                            whileHover="hover"
+                          >
+                            <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                          </motion.div>
+                        </motion.div>
+
+                        <motion.div
+                          className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-black text-base sm:text-lg md:text-xl tracking-[0] leading-6 sm:leading-7"
+                          whileHover={{ x: 3, color: "#1890FF" }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          {card.title}
+                        </motion.div>
+
+                        <motion.div
+                          className="relative w-[240px] [font-family:'Inter',Helvetica] font-normal text-neutral-7 text-base tracking-[0] leading-6"
+                          whileHover={{ x: 3 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          {card.description}
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-
-                    <motion.div
-                      className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-black text-xl tracking-[0] leading-7"
-                      whileHover={{ x: 3, color: "#1890FF" }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      {card.title}
-                    </motion.div>
-
-                    <motion.div
-                      className="relative w-[280px] [font-family:'Inter',Helvetica] font-normal text-neutral-7 text-base tracking-[0] leading-6"
-                      whileHover={{ x: 3 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      {card.description}
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </motion.div>
 
-        {/* Enhanced Controls Section - Removed dots */}
+        {/* Enhanced responsive controls section */}
         <motion.div
-          className="flex items-center gap-6 z-50 mt-8 relative"
+          className="flex items-center gap-4 sm:gap-6 z-50 mt-8 sm:mt-12 lg:mt-8 relative"
           variants={sectionVariants}
         >
           {/* Auto-play toggle button */}
           <motion.button
             onClick={toggleAutoPlay}
-            className="w-10 h-10 bg-white rounded-full border-2 border-gray-200 shadow-lg flex items-center justify-center"
+            className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border-2 border-gray-200 shadow-lg flex items-center justify-center min-h-[44px] min-w-[44px]"
             whileHover={{
               scale: 1.1,
               boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
@@ -858,9 +1183,9 @@ export const BenefitsSection = () => {
               transition={{ duration: 0.3 }}
             >
               {isAutoPlaying ? (
-                <PauseIcon className="w-5 h-5 text-gray-600" />
+                <PauseIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
               ) : (
-                <PlayIcon className="w-5 h-5 text-gray-600" />
+                <PlayIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
               )}
             </motion.div>
           </motion.button>
@@ -873,9 +1198,9 @@ export const BenefitsSection = () => {
               } animate-pulse`}
             />
 
-            {/* Tooltip */}
+            {/* Responsive tooltip */}
             <motion.div
-              className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+              className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap hidden sm:block"
               initial={{ opacity: 0, y: 5 }}
               whileHover={{ opacity: 1, y: 0 }}
             >

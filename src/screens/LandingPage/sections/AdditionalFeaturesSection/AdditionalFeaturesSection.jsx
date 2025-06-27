@@ -40,24 +40,23 @@ export const AdditionalFeaturesSection = () => {
 
   return (
     <Section padding="lg">
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full px-4 sm:px-6 lg:px-8">
         <Card
-          className="flex items-start gap-8 rounded-[24px] overflow-hidden border-none shadow-xl"
+          className="flex flex-col lg:flex-row items-start gap-4 sm:gap-6 lg:gap-8 rounded-[16px] sm:rounded-[20px] lg:rounded-[24px] overflow-hidden border-none shadow-xl w-full max-w-[1140px] p-6 sm:p-8 lg:p-16"
           style={{
-            width: "1140px",
-            height: "444px",
-            padding: "64px",
+            height: "auto",
+            minHeight: "300px",
             background: "linear-gradient(135deg, #0F73FF 0%, #1890FF 100%)",
           }}
         >
-          <CardContent className="flex-1 p-0 h-full">
-            <div className="flex flex-col items-start justify-center gap-8 h-full">
-              <div className="flex gap-6 flex-col items-start">
-                <h2 className="font-inter font-medium text-white text-[32px] leading-[40px] max-w-[400px]">
+          <CardContent className="flex-1 p-0 h-full w-full lg:w-auto">
+            <div className="flex flex-col items-start justify-center gap-6 lg:gap-8 h-full">
+              <div className="flex gap-4 sm:gap-5 lg:gap-6 flex-col items-start w-full">
+                <h2 className="font-inter font-medium text-white text-xl sm:text-2xl lg:text-[32px] leading-tight sm:leading-[1.3] lg:leading-[40px] max-w-full lg:max-w-[400px]">
                   And That's Just the Beginning...
                 </h2>
 
-                <p className="font-inter font-normal text-white/90 text-[16px] leading-[24px] max-w-[400px]">
+                <p className="font-inter font-normal text-white/90 text-sm sm:text-base lg:text-[16px] leading-relaxed sm:leading-[1.5] lg:leading-[24px] max-w-full lg:max-w-[400px]">
                   From in-app chat to verified credentials and AI-powered job
                   suggestions, Mesdo is built to do more than just connect you
                   with hospitals
@@ -76,11 +75,12 @@ export const AdditionalFeaturesSection = () => {
                   duration: 0.2,
                   ease: "easeOut",
                 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   variant="default"
                   size="lg"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-white rounded-[8px] text-[#1890FF] hover:bg-gray-50 font-medium text-[16px] h-auto transition-all duration-200"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 bg-white rounded-[8px] text-[#1890FF] hover:bg-gray-50 font-medium text-sm sm:text-base lg:text-[16px] h-auto transition-all duration-200 w-full sm:w-auto min-h-[44px]"
                 >
                   <span className="whitespace-nowrap">Get Early Access</span>
                   <motion.div
@@ -99,7 +99,7 @@ export const AdditionalFeaturesSection = () => {
                       transition: { duration: 0.2 },
                     }}
                   >
-                    <ArrowUpRightIcon className="w-5 h-5" />
+                    <ArrowUpRightIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </motion.div>
                 </Button>
               </motion.div>
@@ -107,8 +107,8 @@ export const AdditionalFeaturesSection = () => {
           </CardContent>
 
           <div
-            className="flex-1 flex items-start justify-center h-full overflow-hidden relative"
-            style={{ gap: "16px" }}
+            className="flex-1 flex items-start justify-center h-[200px] sm:h-[250px] lg:h-full overflow-hidden relative w-full mt-4 lg:mt-0"
+            style={{ gap: "12px" }}
           >
             {featureColumns.map((column, columnIndex) => {
               const infiniteColumn = createInfiniteColumn(column);
@@ -118,15 +118,15 @@ export const AdditionalFeaturesSection = () => {
                 <div
                   key={`column-${columnIndex}`}
                   className="flex flex-col items-center h-full overflow-hidden relative"
-                  style={{ width: "32%", gap: "12px" }}
+                  style={{ width: "32%", gap: "8px" }}
                 >
                   <motion.div
                     className="flex flex-col items-center absolute"
-                    style={{ gap: "20px" }}
+                    style={{ gap: "12px" }}
                     animate={{
                       y: isEvenColumn
-                        ? [0, -(column.length * 56)] // Updated calculation: 36px height + 20px gap
-                        : [-(column.length * 56), 0], // Opposite direction
+                        ? [0, -(column.length * 44)] // Responsive calculation: 32px height + 12px gap
+                        : [-(column.length * 44), 0], // Opposite direction
                     }}
                     transition={{
                       duration: 15,
@@ -145,9 +145,9 @@ export const AdditionalFeaturesSection = () => {
                         transition={{ duration: 0.2 }}
                       >
                         <Badge
-                          className="inline-flex items-center justify-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-[8px] text-white text-[14px] whitespace-nowrap font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer"
+                          className="inline-flex items-center justify-center px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-sm rounded-[6px] sm:rounded-[8px] text-white text-xs sm:text-sm lg:text-[14px] whitespace-nowrap font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer"
                           style={{
-                            height: "36px",
+                            height: "32px",
                             minWidth: "fit-content",
                             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
                           }}
