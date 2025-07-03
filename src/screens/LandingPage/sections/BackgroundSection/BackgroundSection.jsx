@@ -117,7 +117,7 @@ export const BackgroundSection = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-start gap-2 py-[80px] sm:py-[100px] md:py-[120px] lg:py-[140px] xl:py-[150px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[150px] relative w-full bg-white overflow-hidden"
+      className="flex flex-col items-center gap-2 py-[80px] sm:py-[100px] md:py-[120px] lg:py-[140px] xl:py-[150px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[150px] relative w-full bg-white overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -156,7 +156,7 @@ export const BackgroundSection = () => {
         />
       </div>
 
-      <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between relative w-full z-10 gap-8 xl:gap-0">
+      <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between relative w-full max-w-[1140px] mx-auto z-10 gap-8 xl:gap-0">
         <div className="flex flex-col items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-[59px] w-full xl:max-w-[613px]">
           <motion.div
             className="flex flex-col items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16 w-full xl:max-w-[520px]"

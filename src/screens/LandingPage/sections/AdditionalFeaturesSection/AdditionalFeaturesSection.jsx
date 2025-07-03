@@ -17,6 +17,34 @@ export const AdditionalFeaturesSection = () => {
     ["Live-Profile Building", "Post Creation", "Running Ads"],
   ];
 
+  // Function to shorten long feature names for better display
+  const shortenFeatureName = (feature) => {
+    const shortNames = {
+      "Peer-to-Peer Messaging": "P2P Messaging",
+      "Community Forums": "Forums",
+      "Case Discussions": "Case Discussions",
+      "Verified Institutions": "Verified Institutions",
+      "Trust Score": "Trust Score",
+      "Recruiter Chat": "Recruiter Chat",
+      "Tailored Resume": "Tailored Resume",
+      "Instant Apply": "Instant Apply",
+      "Custom Notifications": "Notifications",
+      "AI Role Matching": "AI Matching",
+      "AI Interview": "AI Interview",
+      "AI Assistant": "AI Assistant",
+      "Application Tracker": "App Tracker",
+      "Profile Analytics": "Analytics",
+      "Group Creations": "Groups",
+      "Top Hospital Listings": "Hospital Listings",
+      "Personalised Job Suggestions": "Job Suggestions",
+      "Learning Hub": "Learning Hub",
+      "Live-Profile Building": "Live Profile",
+      "Post Creation": "Post Creation",
+      "Running Ads": "Running Ads",
+    };
+    return shortNames[feature] || feature;
+  };
+
   // Convert grid to columns for animation
   const createColumns = () => {
     const columns = [[], [], []];
@@ -107,8 +135,8 @@ export const AdditionalFeaturesSection = () => {
           </CardContent>
 
           <div
-            className="flex-1 flex items-start justify-center h-[200px] sm:h-[250px] lg:h-full overflow-hidden relative w-full mt-4 lg:mt-0"
-            style={{ gap: "16px" }}
+            className="flex-1 flex items-start justify-between h-[200px] sm:h-[250px] lg:h-full overflow-hidden relative w-full mt-4 lg:mt-0 px-2"
+            style={{ gap: "8px" }}
           >
             {featureColumns.map((column, columnIndex) => {
               const infiniteColumn = createInfiniteColumn(column);
@@ -117,11 +145,11 @@ export const AdditionalFeaturesSection = () => {
               return (
                 <div
                   key={`column-${columnIndex}`}
-                  className="flex flex-col items-center h-full overflow-hidden relative"
-                  style={{ width: "32%", gap: "12px" }}
+                  className="flex flex-col items-center h-full overflow-hidden relative flex-1"
+                  style={{ gap: "12px" }}
                 >
                   <motion.div
-                    className="flex flex-col items-center absolute"
+                    className="flex flex-col items-center absolute w-full"
                     style={{ gap: "16px" }}
                     animate={{
                       y: isEvenColumn
@@ -146,23 +174,26 @@ export const AdditionalFeaturesSection = () => {
                         className="w-full flex justify-center"
                       >
                         <Badge
-                          className="inline-flex items-center justify-center px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 bg-white/20 backdrop-blur-sm rounded-[10px] text-white text-xs sm:text-sm lg:text-[13px] font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer text-center leading-tight"
+                          className="inline-flex items-center justify-center px-3 sm:px-4 lg:px-4 py-2 sm:py-2.5 bg-white/20 backdrop-blur-sm rounded-[10px] text-white text-xs sm:text-sm lg:text-sm font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer text-center leading-tight"
                           style={{
                             height: "44px",
                             minHeight: "44px",
                             width: "100%",
-                            maxWidth: "160px",
-                            minWidth: "140px",
+                            maxWidth: "150px",
+                            minWidth: "120px",
                             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            wordBreak: "break-word",
-                            hyphens: "auto",
-                            lineHeight: "1.2",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            lineHeight: "1.1",
                           }}
                         >
-                          <span className="text-center px-1">{feature}</span>
+                          <span className="text-center px-1 truncate">
+                            {shortenFeatureName(feature)}
+                          </span>
                         </Badge>
                       </motion.div>
                     ))}

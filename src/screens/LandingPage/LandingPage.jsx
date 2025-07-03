@@ -359,13 +359,15 @@ export const LandingPage = () => {
   return (
     <div className="bg-white flex flex-col items-center justify-center w-full">
       <Header />
-      <div className="bg-white w-full max-w-[1440px] pt-16">
+      <div className="bg-white w-full pt-16">
         <div className="flex flex-col w-full relative">
           <HeroSection />
 
           {/* Timeline Node Connector */}
-          <div className="-mt-8 mb-4">
-            <TimelineNodeConnector />
+          <div className="-mt-8 mb-4 flex justify-center">
+            <div className="w-full max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-[150px]">
+              <TimelineNodeConnector />
+            </div>
           </div>
 
           <div className="-mt-16 sm:-mt-12 md:-mt-8">

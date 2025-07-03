@@ -94,14 +94,14 @@ export const CommunitySection = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-start gap-2 pt-[40px] sm:pt-[60px] lg:pt-[100px] pb-[80px] sm:pb-[120px] lg:pb-[200px] px-4 sm:px-6 md:px-8 lg:px-[150px] relative self-stretch w-full flex-[0_0_auto] bg-white"
+      className="flex flex-col items-center gap-2 pt-[40px] sm:pt-[60px] lg:pt-[100px] pb-[80px] sm:pb-[120px] lg:pb-[200px] px-4 sm:px-6 md:px-8 lg:px-[150px] relative self-stretch w-full flex-[0_0_auto] bg-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
       {/* Desktop Layout (lg and above) - Original exact styling */}
-      <div className="hidden lg:block relative w-full max-w-[1140px] h-[698px]">
+      <div className="hidden lg:block relative w-full max-w-[1140px] h-[698px] mx-auto">
         <div className="relative h-[698px]">
           {/* Header content */}
           <motion.div
@@ -160,19 +160,10 @@ export const CommunitySection = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     variants={pathVariants}
-                    style={{
-                      filter: "drop-shadow(0 4px 12px rgba(24, 144, 255, 0.3))",
-                    }}
                   />
 
                   {/* Animated flowing particle along the path */}
-                  <motion.circle
-                    r="6"
-                    fill="url(#glowGradient)"
-                    style={{
-                      filter: "drop-shadow(0 0 8px rgba(24, 144, 255, 0.8))",
-                    }}
-                  >
+                  <motion.circle r="6" fill="url(#glowGradient)">
                     <animateMotion dur="4s" repeatCount="indefinite" begin="3s">
                       <mpath href="#careerPath" />
                     </animateMotion>
@@ -222,9 +213,6 @@ export const CommunitySection = () => {
                       delay: 0.5,
                       ease: "easeOut",
                     }}
-                    style={{
-                      filter: "drop-shadow(0 0 15px rgba(24, 144, 255, 0.6))",
-                    }}
                   />
                   <motion.circle
                     cx="559"
@@ -241,9 +229,6 @@ export const CommunitySection = () => {
                       delay: 0.65,
                       ease: "easeOut",
                     }}
-                    style={{
-                      filter: "drop-shadow(0 0 15px rgba(24, 144, 255, 0.6))",
-                    }}
                   />
                   <motion.circle
                     cx="900"
@@ -259,9 +244,6 @@ export const CommunitySection = () => {
                       duration: 0.8,
                       delay: 0.8,
                       ease: "easeOut",
-                    }}
-                    style={{
-                      filter: "drop-shadow(0 0 15px rgba(24, 144, 255, 0.6))",
                     }}
                   />
 
@@ -466,7 +448,7 @@ export const CommunitySection = () => {
       </div>
 
       {/* Mobile and Tablet Layout (below lg) - Optimized for small devices */}
-      <div className="block lg:hidden w-full">
+      <div className="block lg:hidden w-full max-w-4xl mx-auto">
         {/* Header content - Responsive and Mobile-Optimized */}
         <motion.div
           className="flex flex-col items-center gap-4 sm:gap-6 mb-8 sm:mb-12 px-2"
@@ -526,19 +508,10 @@ export const CommunitySection = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={pathVariants}
-              style={{
-                filter: "drop-shadow(0 2px 6px rgba(24, 144, 255, 0.3))",
-              }}
             />
 
             {/* Animated flowing particle */}
-            <motion.circle
-              r="3"
-              fill="url(#mobileGlowGradient)"
-              style={{
-                filter: "drop-shadow(0 0 4px rgba(24, 144, 255, 0.8))",
-              }}
-            >
+            <motion.circle r="3" fill="url(#mobileGlowGradient)">
               <animateMotion dur="4s" repeatCount="indefinite" begin="1.5s">
                 <mpath href="#mobilePath" />
               </animateMotion>
@@ -592,9 +565,6 @@ export const CommunitySection = () => {
                   delay: 1 + index * 0.3,
                   ease: "easeOut",
                 }}
-                style={{
-                  filter: "drop-shadow(0 0 8px rgba(24, 144, 255, 0.6))",
-                }}
               />
             ))}
           </motion.svg>
@@ -611,7 +581,7 @@ export const CommunitySection = () => {
               >
                 {/* Mobile card dot */}
                 <motion.div
-                  className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border border-solid border-[#e9ebf1] flex items-center justify-center shadow-sm"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border border-solid border-[#e9ebf1] flex items-center justify-center"
                   variants={dotVariants}
                   custom={index}
                 >
@@ -629,7 +599,7 @@ export const CommunitySection = () => {
                 </motion.div>
 
                 {/* Mobile card content - Compact */}
-                <motion.div className="w-full max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-sm rounded-lg p-4 sm:p-5 border-none text-center shadow-sm">
+                <motion.div className="w-full max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-sm rounded-lg p-4 sm:p-5 border-none text-center">
                   <motion.div
                     className="font-bold text-black text-base sm:text-lg leading-tight mb-2 sm:mb-3"
                     initial={{ opacity: 0, y: 8 }}
