@@ -164,7 +164,7 @@ export const BackgroundSection = () => {
           >
             <div className="flex flex-col items-start gap-3 sm:gap-3.5">
               <motion.span
-                className="font-medium text-primary-6 text-xs sm:text-sm tracking-[-0.18px] leading-6 whitespace-nowrap"
+                className="font-normal text-primary-6 text-xs sm:text-sm tracking-[-0.18px] leading-6 whitespace-nowrap"
                 whileHover={{
                   scale: 1.05,
                   color: "#1890FF",
@@ -176,7 +176,7 @@ export const BackgroundSection = () => {
               </motion.span>
 
               <motion.h2
-                className="w-full font-inter text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] xl:w-[588px] tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1px] xl:tracking-[-1.25px] leading-tight sm:leading-[1.3] md:leading-[1.3] xl:leading-[57.6px]"
+                className="w-full font-inter text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] xl:w-[588px] tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1px] xl:tracking-[-1.25px] leading-tight sm:leading-tight md:leading-tight xl:leading-tight font-normal"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
               >
@@ -219,26 +219,6 @@ export const BackgroundSection = () => {
                 onMouseEnter={() => setHoveredFeature(index)}
                 onMouseLeave={() => setHoveredFeature(null)}
               >
-                {/* Simple hover glow */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20"
-                  style={{
-                    background: `linear-gradient(135deg, ${
-                      index === 0
-                        ? "rgba(59, 130, 246, 0.3)"
-                        : index === 1
-                        ? "rgba(16, 185, 129, 0.3)"
-                        : index === 2
-                        ? "rgba(139, 92, 246, 0.3)"
-                        : "rgba(249, 115, 22, 0.3)"
-                    }, transparent)`,
-                  }}
-                  animate={{
-                    opacity: hoveredFeature === index ? 0.2 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                />
-
                 <motion.div
                   className="relative"
                   whileHover={{
@@ -248,9 +228,9 @@ export const BackgroundSection = () => {
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
                   <Card className="rounded-[56px] w-11 h-11 bg-neutral-1 border border-solid border-[#e9ebf1] p-0 relative overflow-hidden group-hover:shadow-lg transition-all duration-300">
-                    <CardContent className="flex items-center justify-center p-0 relative z-10">
+                    <CardContent className="flex items-center justify-center p-0 relative z-10 w-full h-full">
                       <motion.div
-                        className="absolute top-3 left-3"
+                        className="flex items-center justify-center"
                         whileHover={{
                           scale: 1.2,
                         }}
@@ -270,7 +250,7 @@ export const BackgroundSection = () => {
                   }}
                 >
                   <motion.h3
-                    className="font-medium text-black text-lg sm:text-xl leading-[1.5] sm:leading-[30px] w-full sm:max-w-[275px] transition-colors duration-300"
+                    className="font-normal text-black text-lg sm:text-xl leading-[1.5] sm:leading-[30px] w-full sm:max-w-[275px] transition-colors duration-300"
                     style={{
                       color:
                         hoveredFeature === index

@@ -129,7 +129,7 @@ export const MissionStatementSection = () => {
                 whileHover={{ opacity: 0.6, scale: 1.2 }}
                 transition={{ duration: 0.3 }}
               />
-              <span className="relative px-3 py-2 sm:px-4 sm:py-2 rounded-full">
+              <span className="relative px-3 py-2 sm:px-4 sm:py-2 rounded-full text-[#1890FF]">
                 Mesdo's Mission
               </span>
             </motion.span>

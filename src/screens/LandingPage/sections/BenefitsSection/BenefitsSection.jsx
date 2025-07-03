@@ -27,7 +27,14 @@ export const BenefitsSection = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const intervalRef = useRef(null);
+
+  // Set mounted state
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   // Data for all medical professionals
   const profiles = [
@@ -47,7 +54,7 @@ export const BenefitsSection = () => {
           title: "Same Interview. Again. And Again.",
           description:
             "Hospitals ask identical questions — no one saves progress.",
-          position: "top-[60px] left-0",
+          position: "top-[60px] left-[40px]",
           color: "bg-red-50 border-red-200",
           iconColor: "bg-red-500",
         },
@@ -56,7 +63,7 @@ export const BenefitsSection = () => {
           title: "Every job board feels random.",
           description:
             "Naukri and LinkedIn are flooded with IT & marketing. Rahul has to dig deep to find one real medical opportunity",
-          position: "top-[60px] right-0",
+          position: "top-[60px] right-[40px]",
           color: "bg-orange-50 border-orange-200",
           iconColor: "bg-orange-500",
         },
@@ -64,7 +71,7 @@ export const BenefitsSection = () => {
           icon: Mail,
           title: "No Replies After Applying",
           description: "Sent out 25+ applications. Hardly anyone sees them.",
-          position: "bottom-[60px] left-0",
+          position: "bottom-[60px] left-[40px]",
           color: "bg-purple-50 border-purple-200",
           iconColor: "bg-purple-500",
         },
@@ -73,7 +80,7 @@ export const BenefitsSection = () => {
           title: "No Network, No Guidance",
           description:
             "No mentors, no peers, no verified network to ask for advice or help",
-          position: "bottom-[60px] right-0",
+          position: "bottom-[60px] right-[40px]",
           color: "bg-pink-50 border-pink-200",
           iconColor: "bg-pink-500",
         },
@@ -94,7 +101,7 @@ export const BenefitsSection = () => {
           icon: UserX,
           title: "No Placement, No Guidance",
           description: "College doesn't support job search — she's on her own.",
-          position: "top-[60px] left-0",
+          position: "top-[60px] left-[40px]",
           color: "bg-red-50 border-red-200",
           iconColor: "bg-red-500",
         },
@@ -102,7 +109,7 @@ export const BenefitsSection = () => {
           icon: FileText,
           title: "No Way to Stand Out",
           description: "Her resume looks the same as hundreds of others.",
-          position: "top-[60px] right-0",
+          position: "top-[60px] right-[40px]",
           color: "bg-yellow-50 border-yellow-200",
           iconColor: "bg-yellow-500",
         },
@@ -110,7 +117,7 @@ export const BenefitsSection = () => {
           icon: MessageCircle,
           title: "Only Finds Jobs on WhatsApp",
           description: "Unverified links, dead ends, and no real offers.",
-          position: "bottom-[60px] left-0",
+          position: "bottom-[60px] left-[40px]",
           color: "bg-green-50 border-green-200",
           iconColor: "bg-green-500",
         },
@@ -119,7 +126,7 @@ export const BenefitsSection = () => {
           title: "No Mentors, No Clarity",
           description:
             "No one to guide her on interviews, skills, or career paths.",
-          position: "bottom-[60px] right-0",
+          position: "bottom-[60px] right-[40px]",
           color: "bg-indigo-50 border-indigo-200",
           iconColor: "bg-indigo-500",
         },
@@ -141,7 +148,7 @@ export const BenefitsSection = () => {
           title: "Reputation Doesn't Travel with Her",
           description:
             "Each new hospital treats her like a fresh face — decades of experience don't follow.",
-          position: "top-[60px] left-0",
+          position: "top-[60px] left-[40px]",
           color: "bg-blue-50 border-blue-200",
           iconColor: "bg-blue-500",
         },
@@ -150,7 +157,7 @@ export const BenefitsSection = () => {
           title: "Disconnected After Every Transfer",
           description:
             "No long-term network — colleagues change, WhatsApp groups vanish.",
-          position: "top-[60px] right-0",
+          position: "top-[60px] right-[40px]",
           color: "bg-red-50 border-red-200",
           iconColor: "bg-red-500",
         },
@@ -159,7 +166,7 @@ export const BenefitsSection = () => {
           title: "Loses Ongoing Case Discussions",
           description:
             "No consistent peer group to discuss complex cases or learn from.",
-          position: "bottom-[60px] left-0",
+          position: "bottom-[60px] left-[40px]",
           color: "bg-teal-50 border-teal-200",
           iconColor: "bg-teal-500",
         },
@@ -168,7 +175,7 @@ export const BenefitsSection = () => {
           title: "No Single Place to Track Her Career",
           description:
             "No verified digital profile that captures her journey across cities and institutions.",
-          position: "bottom-[60px] right-0",
+          position: "bottom-[60px] right-[40px]",
           color: "bg-amber-50 border-amber-200",
           iconColor: "bg-amber-500",
         },
@@ -190,7 +197,7 @@ export const BenefitsSection = () => {
           title: "No Way to Prove Real Experience",
           description:
             "His work is hands-on, but there's no verified record that shows it.",
-          position: "top-[60px] left-0",
+          position: "top-[60px] left-[40px]",
           color: "bg-emerald-50 border-emerald-200",
           iconColor: "bg-emerald-500",
         },
@@ -199,7 +206,7 @@ export const BenefitsSection = () => {
           title: "Overlooked by Recruiters",
           description:
             "Most hiring platforms are built for doctors or nurses — AHPs get ignored.",
-          position: "top-[60px] right-0",
+          position: "top-[60px] right-[40px]",
           color: "bg-violet-50 border-violet-200",
           iconColor: "bg-violet-500",
         },
@@ -208,7 +215,7 @@ export const BenefitsSection = () => {
           title: "Same Process, Every Time",
           description:
             "Every job means printing a CV and going through basic screenings again.",
-          position: "bottom-[60px] left-0",
+          position: "bottom-[60px] left-[40px]",
           color: "bg-rose-50 border-rose-200",
           iconColor: "bg-rose-500",
         },
@@ -217,7 +224,7 @@ export const BenefitsSection = () => {
           title: "No Peer Community",
           description:
             "There's no space for OT techs to connect, discuss, or learn from each other.",
-          position: "bottom-[60px] right-0",
+          position: "bottom-[60px] right-[40px]",
           color: "bg-sky-50 border-sky-200",
           iconColor: "bg-sky-500",
         },
@@ -229,27 +236,48 @@ export const BenefitsSection = () => {
 
   // Auto-rotation effect
   useEffect(() => {
-    if (isAutoPlaying && !isPaused) {
-      intervalRef.current = setInterval(() => {
-        setDirection(1);
-        setCurrentProfileIndex((prevIndex) =>
-          prevIndex === profiles.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 4000); // Slightly longer for better UX
+    // Clear any existing interval first
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
 
+    // Only start auto-play if component is mounted and conditions are met
+    if (isMounted && isAutoPlaying && !isPaused) {
+      // Small delay to ensure everything is rendered
+      const timeoutId = setTimeout(() => {
+        intervalRef.current = setInterval(() => {
+          setDirection(1);
+          setCurrentProfileIndex((prevIndex) =>
+            prevIndex === profiles.length - 1 ? 0 : prevIndex + 1
+          );
+        }, 4000);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+      };
+    }
+
+    // Cleanup function
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
-  }, [isAutoPlaying, isPaused, profiles.length]);
+  }, [isMounted, isAutoPlaying, isPaused, profiles.length]);
 
-  // Pause auto-rotation when component unmounts
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
   }, []);
@@ -479,7 +507,7 @@ export const BenefitsSection = () => {
             </motion.p>
 
             <motion.h2
-              className="relative w-full max-w-[622px] font-medium text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] text-center tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1.25px] leading-tight sm:leading-[1.3] md:leading-[57.6px] font-['Inter',Helvetica] px-4 sm:px-6 md:px-0"
+              className="relative w-full max-w-[622px] font-medium text-[#060b13] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[44.2px] text-center tracking-[-0.5px] sm:tracking-[-0.8px] md:tracking-[-1.25px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-tight font-['Inter',Helvetica] px-4 sm:px-6 md:px-0"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -530,7 +558,7 @@ export const BenefitsSection = () => {
               <motion.button
                 onClick={handlePrevious}
                 disabled={isLoading}
-                className="absolute w-16 h-16 top-[240px] left-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="absolute w-12 h-12 top-[240px] left-[360px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -538,7 +566,7 @@ export const BenefitsSection = () => {
                 type="button"
               >
                 <motion.div variants={iconVariants} whileHover="hover">
-                  <ChevronLeftIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                  <ChevronLeftIcon className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
                 </motion.div>
 
                 {/* Loading indicator */}
@@ -558,7 +586,7 @@ export const BenefitsSection = () => {
               <motion.button
                 onClick={handleNext}
                 disabled={isLoading}
-                className="absolute w-16 h-16 top-[240px] right-[305px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="absolute w-12 h-12 top-[240px] right-[360px] bg-white rounded-full border-2 border-gray-200 shadow-xl group flex items-center justify-center z-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -566,7 +594,7 @@ export const BenefitsSection = () => {
                 type="button"
               >
                 <motion.div variants={iconVariants} whileHover="hover">
-                  <ChevronRightIcon className="w-7 h-7 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                  <ChevronRightIcon className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
                 </motion.div>
 
                 {/* Loading indicator */}
@@ -1160,53 +1188,6 @@ export const BenefitsSection = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-        </motion.div>
-
-        {/* Enhanced responsive controls section */}
-        <motion.div
-          className="flex items-center gap-4 sm:gap-6 z-50 mt-8 sm:mt-12 lg:mt-8 relative"
-          variants={sectionVariants}
-        >
-          {/* Auto-play toggle button */}
-          <motion.button
-            onClick={toggleAutoPlay}
-            className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border-2 border-gray-200 shadow-lg flex items-center justify-center min-h-[44px] min-w-[44px]"
-            whileHover={{
-              scale: 1.1,
-              boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
-          >
-            <motion.div
-              animate={{ rotate: isAutoPlaying ? 0 : 180 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isAutoPlaying ? (
-                <PauseIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-              ) : (
-                <PlayIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-              )}
-            </motion.div>
-          </motion.button>
-
-          {/* Status indicator with tooltip */}
-          <motion.div className="relative group" whileHover={{ scale: 1.1 }}>
-            <div
-              className={`w-3 h-3 rounded-full ${
-                isAutoPlaying && !isPaused ? "bg-green-500" : "bg-gray-400"
-              } animate-pulse`}
-            />
-
-            {/* Responsive tooltip */}
-            <motion.div
-              className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap hidden sm:block"
-              initial={{ opacity: 0, y: 5 }}
-              whileHover={{ opacity: 1, y: 0 }}
-            >
-              {isAutoPlaying && !isPaused ? "Auto-playing" : "Paused"}
-            </motion.div>
-          </motion.div>
         </motion.div>
       </div>
     </motion.section>

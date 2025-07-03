@@ -290,7 +290,7 @@ export const WhyChooseMesdoSection = () => {
                       </span>
                     </motion.div>
                     <motion.div
-                      className="w-[200px] lg:w-[296px] h-[60px] lg:h-[71px] flex items-center justify-center rounded-[12px_12px_12px_0px] lg:rounded-[16px_16px_16px_0px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)]"
+                      className="w-[200px] lg:w-[296px] h-[60px] lg:h-[71px] flex items-center justify-center rounded-[12px_12px_0px_0px] lg:rounded-[16px_16px_0px_0px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)]"
                       whileHover={{
                         scale: 1.02,
                         boxShadow: "0 8px 25px rgba(15, 115, 255, 0.3)",
@@ -382,15 +382,11 @@ export const WhyChooseMesdoSection = () => {
                             </motion.div>
                           </div>
                           <div
-                            className={`w-[200px] lg:w-[296px] h-[60px] lg:h-[72px] border-t border-[#40a9ff] p-3 lg:p-6 flex items-center ${
+                            className={`w-[200px] lg:w-[296px] h-[60px] lg:h-[72px] border-t border-[#40a9ff] p-3 lg:p-6 flex items-center bg-[#1890FF] ${
                               index === comparisonFeatures.length - 1
                                 ? "border-b rounded-br-[12px] lg:rounded-br-[16px]"
                                 : ""
                             }`}
-                            style={{
-                              background:
-                                "linear-gradient(180deg, rgba(15,115,255,1) 0%, rgba(24,144,255,1) 100%)",
-                            }}
                           >
                             <motion.div
                               className="flex items-center gap-2"

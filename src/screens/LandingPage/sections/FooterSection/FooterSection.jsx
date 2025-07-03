@@ -89,26 +89,31 @@ export const FooterSection = () => {
     },
   };
 
-  const watermarkVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+  const mesdoVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.8 },
     visible: {
       opacity: 1,
+      y: 0,
       scale: 1,
       transition: {
         duration: 1.2,
         ease: "easeOut",
+        delay: 1.0,
       },
     },
   };
 
   return (
-    <div className="relative w-full">
-      {/* Main Footer Content */}
+    <motion.div
+      className="relative w-full"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={containerVariants}
+    >
+      {/* Main Footer Content with MESDO integrated */}
       <motion.footer
         className="relative w-full bg-[linear-gradient(180deg,rgba(24,144,255,1)_0%,rgba(15,115,255,1)_100%)] overflow-hidden"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
         variants={containerVariants}
       >
         {/* Desktop Layout (lg and above) - Original exact styling */}
@@ -347,38 +352,29 @@ export const FooterSection = () => {
             </div>
           </motion.div>
         </div>
-      </motion.footer>
 
-      {/* Large "Mesdo" Text Section - Fully Responsive */}
-      <motion.div
-        className="relative w-full overflow-hidden -mt-1 flex items-center justify-center"
-        style={{
-          height: "clamp(120px, 25vh, 400px)",
-          background:
-            "linear-gradient(180deg, rgba(15,115,255,1) 0%, rgba(24,144,255,1) 100%)",
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={watermarkVariants}
-      >
-        {/* Single Responsive Watermark Text */}
+        {/* Large "MESDO" Text Section - Integrated within Footer */}
         <motion.div
-          className="font-black leading-none tracking-wide text-center w-full px-4"
+          className="relative w-full overflow-hidden flex items-center justify-center"
           style={{
-            color: "rgba(173, 216, 255, 0.9)",
-            fontFamily: "Inter, Helvetica",
-            fontSize: "clamp(2.5rem, 12vw, 20rem)",
-            letterSpacing: "0.05em",
+            height: "clamp(200px, 40vh, 600px)",
           }}
-          initial={{ y: 50, opacity: 0, scale: 0.8 }}
-          whileInView={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 2.5, ease: "easeOut", delay: 1.2 }}
-          viewport={{ once: true }}
+          variants={mesdoVariants}
         >
-          Mesdo
+          {/* Large Responsive MESDO Text */}
+          <motion.div
+            className="font-black leading-none tracking-wide text-center w-full px-4"
+            style={{
+              color: "rgba(173, 216, 255, 0.9)",
+              fontFamily: "Inter, Helvetica",
+              fontSize: "clamp(6rem, 20vw, 30rem)",
+              letterSpacing: "0.05em",
+            }}
+          >
+            MESDO
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
+      </motion.footer>
+    </motion.div>
   );
 };

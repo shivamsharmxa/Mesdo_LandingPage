@@ -10,7 +10,7 @@ export const CommunitySection = () => {
         "Without Mesdo, your profile gets lost. With it, you're verified, visible, and finally get replies that matter.",
       position: { top: 397, left: 112 },
       dotPosition: { top: 0, left: 0 },
-      fontFamily: "font-inter",
+      fontFamily: "font-manrope font-extrabold",
     },
     {
       title: "Get Connected.",
@@ -37,7 +37,7 @@ export const CommunitySection = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -45,18 +45,19 @@ export const CommunitySection = () => {
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: 50,
-      scale: 0.8,
+      y: 30,
+      scale: 0.95,
     },
-    visible: {
+    visible: (custom) => ({
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: "easeOut",
+        delay: custom * 0.15,
       },
-    },
+    }),
   };
 
   const dotVariants = {
@@ -64,14 +65,15 @@ export const CommunitySection = () => {
       scale: 0,
       opacity: 0,
     },
-    visible: {
+    visible: (custom) => ({
       scale: 1,
       opacity: 1,
       transition: {
         duration: 0.4,
         ease: "easeOut",
+        delay: custom * 0.15,
       },
-    },
+    }),
   };
 
   const pathVariants = {
@@ -92,10 +94,10 @@ export const CommunitySection = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-start gap-2 pt-[60px] sm:pt-[80px] lg:pt-[100px] pb-[120px] sm:pb-[160px] lg:pb-[200px] px-4 sm:px-6 md:px-8 lg:px-[150px] relative self-stretch w-full flex-[0_0_auto] bg-white"
+      className="flex flex-col items-start gap-2 pt-[40px] sm:pt-[60px] lg:pt-[100px] pb-[80px] sm:pb-[120px] lg:pb-[200px] px-4 sm:px-6 md:px-8 lg:px-[150px] relative self-stretch w-full flex-[0_0_auto] bg-white"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
       {/* Desktop Layout (lg and above) - Original exact styling */}
@@ -117,7 +119,7 @@ export const CommunitySection = () => {
               </motion.p>
 
               <motion.h2
-                className="relative w-[588px] h-[116px] [font-family:'Inter',Helvetica] font-medium text-[#060b13] text-[44.2px] tracking-[-1.25px] leading-[57.6px]"
+                className="relative w-[588px] h-[116px] [font-family:'Inter',Helvetica] font-normal text-[#060b13] text-[44.2px] tracking-[-1.25px] leading-[57.6px]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -217,7 +219,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 0.8,
-                      delay: 2.5,
+                      delay: 0.5,
                       ease: "easeOut",
                     }}
                     style={{
@@ -236,7 +238,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 0.8,
-                      delay: 3.2,
+                      delay: 0.65,
                       ease: "easeOut",
                     }}
                     style={{
@@ -255,7 +257,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 0.8,
-                      delay: 3.9,
+                      delay: 0.8,
                       ease: "easeOut",
                     }}
                     style={{
@@ -277,7 +279,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 3,
-                      delay: 3,
+                      delay: 1,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
@@ -295,7 +297,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 3,
-                      delay: 3.5,
+                      delay: 1.15,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
@@ -313,7 +315,7 @@ export const CommunitySection = () => {
                     }}
                     transition={{
                       duration: 3,
-                      delay: 4,
+                      delay: 1.3,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
@@ -364,20 +366,10 @@ export const CommunitySection = () => {
                       left: `${card.position.left}px`,
                     }}
                     variants={cardVariants}
-                    whileHover={{
-                      scale: 1.05,
-                      y: -10,
-                      transition: { duration: 0.3 },
-                    }}
                     custom={index}
                   >
-                    <motion.div
-                      whileHover={{
-                        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-                        transition: { duration: 0.3 },
-                      }}
-                    >
-                      <Card className="flex flex-col w-[279px] items-start gap-3 absolute top-[88px] left-5 border-none shadow-lg bg-white/95 backdrop-blur-sm rounded-xl p-4">
+                    <motion.div>
+                      <Card className="flex flex-col w-[279px] items-start gap-3 absolute top-[88px] left-5 border-none bg-white/95 backdrop-blur-sm rounded-xl p-4">
                         <CardContent className="p-0">
                           <motion.div
                             className={`relative self-stretch mt-[-1.00px] [font-family:${
@@ -385,15 +377,23 @@ export const CommunitySection = () => {
                                 ? "'Inter'"
                                 : "'Manrope'"
                             },Helvetica] ${
-                              card.fontFamily.includes("extrabold")
+                              card.fontFamily === "font-inter"
+                                ? "font-normal"
+                                : card.fontFamily.includes("extrabold")
                                 ? "font-extrabold"
                                 : "font-semibold"
                             } text-black text-base tracking-[0] leading-[30px]`}
+                            style={{
+                              fontWeight:
+                                card.fontFamily === "font-semibold"
+                                  ? 600
+                                  : undefined,
+                            }}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
                               duration: 0.4,
-                              delay: index * 0.2 + 0.8,
+                              delay: index * 0.15 + 0.2,
                             }}
                           >
                             {card.title}
@@ -409,7 +409,7 @@ export const CommunitySection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
                               duration: 0.4,
-                              delay: index * 0.2 + 1.0,
+                              delay: index * 0.15 + 0.4,
                             }}
                           >
                             {card.description}
@@ -419,13 +419,8 @@ export const CommunitySection = () => {
                     </motion.div>
 
                     <motion.div
-                      className="absolute w-16 h-16 top-0 left-0 bg-white rounded-[60px] border border-solid border-[#e9ebf1] shadow-lg"
+                      className="absolute w-16 h-16 top-0 left-0 bg-white rounded-[60px] border border-solid border-[#e9ebf1]"
                       variants={dotVariants}
-                      whileHover={{
-                        scale: 1.1,
-                        boxShadow: "0 8px 25px rgba(24, 144, 255, 0.3)",
-                        transition: { duration: 0.2 },
-                      }}
                       custom={index}
                     >
                       <motion.div
@@ -470,38 +465,38 @@ export const CommunitySection = () => {
         </div>
       </div>
 
-      {/* Mobile and Tablet Layout (below lg) */}
-      <div className="block lg:hidden w-full max-w-4xl mx-auto">
-        {/* Header content - Responsive */}
+      {/* Mobile and Tablet Layout (below lg) - Optimized for small devices */}
+      <div className="block lg:hidden w-full">
+        {/* Header content - Responsive and Mobile-Optimized */}
         <motion.div
-          className="flex flex-col items-center sm:items-start gap-6 sm:gap-8 mb-12 sm:mb-16"
+          className="flex flex-col items-center gap-4 sm:gap-6 mb-8 sm:mb-12 px-2"
           variants={cardVariants}
         >
-          <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-4 w-full">
+          <div className="flex flex-col items-center gap-2 sm:gap-3 w-full text-center">
             <motion.p
-              className="[font-family:'Inter',Helvetica] font-medium text-primary-6 text-sm sm:text-base tracking-[-0.18px] leading-6 text-center sm:text-left"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              className="[font-family:'Inter',Helvetica] font-medium text-primary-6 text-sm tracking-[-0.18px] leading-6"
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
               Reach The Top
             </motion.p>
 
             <motion.h2
-              className="[font-family:'Inter',Helvetica] font-medium text-[#060b13] text-2xl sm:text-3xl md:text-4xl tracking-[-0.8px] sm:tracking-[-1px] md:tracking-[-1.25px] leading-tight sm:leading-[1.2] md:leading-[1.3] text-center sm:text-left px-4 sm:px-0"
-              initial={{ opacity: 0, y: 30 }}
+              className="[font-family:'Inter',Helvetica] font-normal text-[#060b13] text-xl sm:text-2xl md:text-3xl tracking-[-0.6px] sm:tracking-[-0.8px] md:tracking-[-1px] leading-tight max-w-[90%] sm:max-w-[85%]"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
               Elevate Your Healthcare Career with Mesdo
             </motion.h2>
           </div>
 
           <motion.p
-            className="[font-family:'Inter',Helvetica] font-normal text-neutral-9 text-base sm:text-lg md:text-xl tracking-[-0.18px] sm:tracking-[-0.2px] md:tracking-[-0.24px] leading-relaxed sm:leading-[1.6] md:leading-[35px] text-center sm:text-left px-4 sm:px-0"
-            initial={{ opacity: 0, y: 20 }}
+            className="[font-family:'Inter',Helvetica] font-normal text-neutral-9 text-sm sm:text-base leading-relaxed text-center max-w-[95%] sm:max-w-[85%]"
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
           >
             From stagnant applications to verified recognition and stronger peer
             networks — here&apos;s what your journey looks like with Mesdo by
@@ -509,39 +504,42 @@ export const CommunitySection = () => {
           </motion.p>
         </motion.div>
 
-        {/* Mobile/Tablet Journey Path */}
+        {/* Mobile Journey Path - Simplified and Responsive */}
         <div className="relative w-full">
-          {/* Simplified animated path for mobile */}
+          {/* Compact animated path for mobile */}
           <motion.svg
-            className="absolute w-full h-full min-h-[800px] sm:min-h-[900px] md:min-h-[1000px] top-0 left-0 z-0"
-            viewBox="0 0 400 800"
+            className="absolute w-full top-0 left-0 z-0"
+            style={{ height: `${featureCards.length * 200 + 100}px` }}
+            viewBox={`0 0 100 ${featureCards.length * 200 + 100}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid meet"
           >
-            {/* Vertical curved path for mobile */}
+            {/* Simple vertical path for mobile */}
             <motion.path
-              d="M 200 50 C 180 150 220 250 200 350 C 180 450 220 550 200 650 C 200 700 200 750 200 780"
+              d={`M 50 20 ${featureCards
+                .map((_, i) => `L 50 ${80 + i * 200}`)
+                .join(" ")}`}
               stroke="url(#mobileGradient)"
-              strokeWidth="4"
+              strokeWidth="3"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={pathVariants}
               style={{
-                filter: "drop-shadow(0 2px 8px rgba(24, 144, 255, 0.3))",
+                filter: "drop-shadow(0 2px 6px rgba(24, 144, 255, 0.3))",
               }}
             />
 
             {/* Animated flowing particle */}
             <motion.circle
-              r="4"
+              r="3"
               fill="url(#mobileGlowGradient)"
               style={{
-                filter: "drop-shadow(0 0 6px rgba(24, 144, 255, 0.8))",
+                filter: "drop-shadow(0 0 4px rgba(24, 144, 255, 0.8))",
               }}
             >
-              <animateMotion dur="6s" repeatCount="indefinite" begin="2s">
+              <animateMotion dur="4s" repeatCount="indefinite" begin="1.5s">
                 <mpath href="#mobilePath" />
               </animateMotion>
             </motion.circle>
@@ -549,7 +547,9 @@ export const CommunitySection = () => {
             {/* Hidden path for animation */}
             <path
               id="mobilePath"
-              d="M 200 50 C 180 150 220 250 200 350 C 180 450 220 550 200 650 C 200 700 200 750 200 780"
+              d={`M 50 20 ${featureCards
+                .map((_, i) => `L 50 ${80 + i * 200}`)
+                .join(" ")}`}
               fill="none"
               stroke="none"
             />
@@ -575,91 +575,48 @@ export const CommunitySection = () => {
             </defs>
 
             {/* Mobile step dots */}
-            <motion.circle
-              cx="200"
-              cy="150"
-              r="8"
-              fill="#1890FF"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.2, 1],
-                opacity: [0, 1, 1],
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 1.5,
-                ease: "easeOut",
-              }}
-              style={{
-                filter: "drop-shadow(0 0 12px rgba(24, 144, 255, 0.6))",
-              }}
-            />
-            <motion.circle
-              cx="200"
-              cy="350"
-              r="8"
-              fill="#1890FF"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.2, 1],
-                opacity: [0, 1, 1],
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 2.0,
-                ease: "easeOut",
-              }}
-              style={{
-                filter: "drop-shadow(0 0 12px rgba(24, 144, 255, 0.6))",
-              }}
-            />
-            <motion.circle
-              cx="200"
-              cy="550"
-              r="8"
-              fill="#1890FF"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.2, 1],
-                opacity: [0, 1, 1],
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 2.5,
-                ease: "easeOut",
-              }}
-              style={{
-                filter: "drop-shadow(0 0 12px rgba(24, 144, 255, 0.6))",
-              }}
-            />
+            {featureCards.map((_, index) => (
+              <motion.circle
+                key={index}
+                cx="50"
+                cy={80 + index * 200}
+                r="6"
+                fill="#1890FF"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{
+                  scale: [0, 1.2, 1],
+                  opacity: [0, 1, 1],
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 1 + index * 0.3,
+                  ease: "easeOut",
+                }}
+                style={{
+                  filter: "drop-shadow(0 0 8px rgba(24, 144, 255, 0.6))",
+                }}
+              />
+            ))}
           </motion.svg>
 
-          {/* Mobile/Tablet Feature Cards */}
-          <div className="relative z-10 space-y-16 sm:space-y-20 md:space-y-24">
+          {/* Mobile Feature Cards - Compact and Touch-Friendly */}
+          <div className="relative z-10 space-y-8 sm:space-y-12">
             {featureCards.map((card, index) => (
               <motion.div
                 key={index}
-                className="flex flex-col items-center gap-6 px-4 sm:px-6"
+                className="flex flex-col items-center gap-4 px-3 sm:px-4"
                 variants={cardVariants}
                 custom={index}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.3 },
-                }}
+                style={{ paddingTop: index === 0 ? "40px" : "0" }}
               >
                 {/* Mobile card dot */}
                 <motion.div
-                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white rounded-full border border-solid border-[#e9ebf1] shadow-lg flex items-center justify-center min-h-[44px] min-w-[44px]"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border border-solid border-[#e9ebf1] flex items-center justify-center shadow-sm"
                   variants={dotVariants}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 8px 25px rgba(24, 144, 255, 0.3)",
-                    transition: { duration: 0.2 },
-                  }}
                   custom={index}
                 >
                   <motion.div
-                    className="w-5 h-5 sm:w-6 sm:h-6 md:w-[23px] md:h-[23px] rounded-lg bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)]"
+                    className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)]"
                     animate={{
                       scale: [1, 1.1, 1],
                     }}
@@ -671,41 +628,27 @@ export const CommunitySection = () => {
                   />
                 </motion.div>
 
-                {/* Mobile card content */}
-                <motion.div
-                  className="w-full max-w-sm sm:max-w-md md:max-w-lg bg-white/95 backdrop-blur-sm rounded-xl p-4 sm:p-5 md:p-6 shadow-lg border-none text-center"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-                    transition: { duration: 0.3 },
-                  }}
-                >
+                {/* Mobile card content - Compact */}
+                <motion.div className="w-full max-w-xs sm:max-w-sm bg-white/95 backdrop-blur-sm rounded-lg p-4 sm:p-5 border-none text-center shadow-sm">
                   <motion.div
-                    className={`[font-family:${
-                      card.fontFamily === "font-inter" ? "'Inter'" : "'Manrope'"
-                    },Helvetica] ${
-                      card.fontFamily.includes("extrabold")
-                        ? "font-extrabold"
-                        : "font-semibold"
-                    } text-black text-base sm:text-lg md:text-xl tracking-[0] leading-relaxed mb-3 sm:mb-4`}
-                    initial={{ opacity: 0, y: 10 }}
+                    className="font-bold text-black text-base sm:text-lg leading-tight mb-2 sm:mb-3"
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{
-                      duration: 0.4,
-                      delay: index * 0.2 + 0.8,
+                      duration: 0.3,
+                      delay: index * 0.15 + 0.2,
                     }}
                   >
                     {card.title}
                   </motion.div>
 
                   <motion.div
-                    className={`[font-family:${
-                      card.fontFamily === "font-inter" ? "'Inter'" : "'Manrope'"
-                    },Helvetica] font-medium text-[#64607d] text-sm sm:text-base md:text-lg tracking-[-0.2px] sm:tracking-[-0.28px] md:tracking-[-0.32px] leading-relaxed`}
-                    initial={{ opacity: 0, y: 10 }}
+                    className="font-medium text-[#64607d] text-sm sm:text-base leading-relaxed"
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{
-                      duration: 0.4,
-                      delay: index * 0.2 + 1.0,
+                      duration: 0.3,
+                      delay: index * 0.15 + 0.35,
                     }}
                   >
                     {card.description}
@@ -715,23 +658,23 @@ export const CommunitySection = () => {
             ))}
           </div>
 
-          {/* Mobile floating particles */}
-          {[...Array(4)].map((_, i) => (
+          {/* Subtle mobile particles - Reduced for performance */}
+          {[...Array(2)].map((_, i) => (
             <motion.div
               key={`mobile-particle-${i}`}
-              className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-200 rounded-full opacity-60"
+              className="absolute w-1 h-1 bg-blue-300 rounded-full opacity-50"
               style={{
-                left: `${20 + i * 25}%`,
-                top: `${150 + i * 180}px`,
+                left: `${30 + i * 40}%`,
+                top: `${100 + i * 150}px`,
               }}
               animate={{
-                y: [-8, 8, -8],
-                opacity: [0.3, 0.8, 0.3],
+                y: [-5, 5, -5],
+                opacity: [0.3, 0.7, 0.3],
               }}
               transition={{
-                duration: 3,
+                duration: 4,
                 repeat: Infinity,
-                delay: i * 0.5,
+                delay: i * 1,
                 ease: "easeInOut",
               }}
             />

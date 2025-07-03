@@ -108,7 +108,7 @@ export const AdditionalFeaturesSection = () => {
 
           <div
             className="flex-1 flex items-start justify-center h-[200px] sm:h-[250px] lg:h-full overflow-hidden relative w-full mt-4 lg:mt-0"
-            style={{ gap: "12px" }}
+            style={{ gap: "16px" }}
           >
             {featureColumns.map((column, columnIndex) => {
               const infiniteColumn = createInfiniteColumn(column);
@@ -118,15 +118,15 @@ export const AdditionalFeaturesSection = () => {
                 <div
                   key={`column-${columnIndex}`}
                   className="flex flex-col items-center h-full overflow-hidden relative"
-                  style={{ width: "32%", gap: "8px" }}
+                  style={{ width: "32%", gap: "12px" }}
                 >
                   <motion.div
                     className="flex flex-col items-center absolute"
-                    style={{ gap: "12px" }}
+                    style={{ gap: "16px" }}
                     animate={{
                       y: isEvenColumn
-                        ? [0, -(column.length * 44)] // Responsive calculation: 32px height + 12px gap
-                        : [-(column.length * 44), 0], // Opposite direction
+                        ? [0, -(column.length * 60)] // Updated calculation: 44px height + 16px gap
+                        : [-(column.length * 60), 0], // Opposite direction
                     }}
                     transition={{
                       duration: 15,
@@ -143,16 +143,26 @@ export const AdditionalFeaturesSection = () => {
                           backgroundColor: "rgba(255, 255, 255, 0.35)",
                         }}
                         transition={{ duration: 0.2 }}
+                        className="w-full flex justify-center"
                       >
                         <Badge
-                          className="inline-flex items-center justify-center px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-sm rounded-[6px] sm:rounded-[8px] text-white text-xs sm:text-sm lg:text-[14px] whitespace-nowrap font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer"
+                          className="inline-flex items-center justify-center px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 bg-white/20 backdrop-blur-sm rounded-[10px] text-white text-xs sm:text-sm lg:text-[13px] font-normal hover:bg-white/30 transition-all duration-200 border border-white/10 cursor-pointer text-center leading-tight"
                           style={{
-                            height: "32px",
-                            minWidth: "fit-content",
+                            height: "44px",
+                            minHeight: "44px",
+                            width: "100%",
+                            maxWidth: "160px",
+                            minWidth: "140px",
                             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            wordBreak: "break-word",
+                            hyphens: "auto",
+                            lineHeight: "1.2",
                           }}
                         >
-                          {feature}
+                          <span className="text-center px-1">{feature}</span>
                         </Badge>
                       </motion.div>
                     ))}
