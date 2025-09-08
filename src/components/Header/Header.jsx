@@ -1,17 +1,24 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
-  const [activeTab, setActiveTab] = useState("Home");
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Blogs", href: "#blogs" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Contact Us", href: "/contact" },
   ];
+
+  const getActiveTab = () => {
+    const path = location.pathname;
+    const activeItem = navigationItems.find(item => item.href === path);
+    return activeItem ? activeItem.name : "Home";
+  };
 
   const headerVariants = {
     hidden: { y: -100, opacity: 0 },
@@ -76,8 +83,7 @@ export const Header = () => {
     },
   };
 
-  const handleMobileNavClick = (itemName) => {
-    setActiveTab(itemName);
+  const handleMobileNavClick = () => {
     setIsMobileMenuOpen(false);
   };
 
@@ -147,39 +153,37 @@ export const Header = () => {
               variants={itemVariants}
             >
               {navigationItems.map((item) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center ${
-                    activeTab === item.name
-                      ? "text-[#1890FF]"
-                      : "text-[#64607d] hover:text-[#1890FF]"
-                  }`}
-                  onClick={() => setActiveTab(item.name)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
+                <motion.div key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to={item.href}
+                    className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center ${
+                      getActiveTab() === item.name
+                        ? "text-[#1890FF]"
+                        : "text-[#64607d] hover:text-[#1890FF]"
+                    }`}
+                  >
+                    {item.name}
 
-                  {/* Active indicator */}
-                  {activeTab === item.name && (
+                    {/* Active indicator */}
+                    {getActiveTab() === item.name && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0F73FF] to-[#1890FF] rounded-full"
+                        layoutId="activeIndicator"
+                        initial={{ opacity: 0, scaleX: 0 }}
+                        animate={{ opacity: 1, scaleX: 1 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      />
+                    )}
+
+                    {/* Hover effect */}
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0F73FF] to-[#1890FF] rounded-full"
-                      layoutId="activeIndicator"
-                      initial={{ opacity: 0, scaleX: 0 }}
-                      animate={{ opacity: 1, scaleX: 1 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="absolute inset-0 bg-[#1890FF]/5 rounded-lg"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileHover={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.2 }}
                     />
-                  )}
-
-                  {/* Hover effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-[#1890FF]/5 rounded-lg"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </motion.a>
+                  </Link>
+                </motion.div>
               ))}
             </motion.nav>
 
@@ -288,33 +292,36 @@ export const Header = () => {
                 {/* Mobile Navigation Links */}
                 <nav className="px-2">
                   {navigationItems.map((item, index) => (
-                    <motion.a
+                    <motion.div
                       key={item.name}
-                      href={item.href}
-                      className={`relative flex items-center px-4 py-3 text-base font-medium transition-colors duration-200 rounded-xl mx-2 mb-1 min-h-[44px] ${
-                        activeTab === item.name
-                          ? "text-[#1890FF] bg-[#1890FF]/5"
-                          : "text-[#64607d] hover:text-[#1890FF] hover:bg-gray-50"
-                      }`}
-                      onClick={() => handleMobileNavClick(item.name)}
                       variants={mobileItemVariants}
                       custom={index}
                       whileHover={{ scale: 1.02, x: 4 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      {item.name}
+                      <Link
+                        to={item.href}
+                        className={`relative flex items-center px-4 py-3 text-base font-medium transition-colors duration-200 rounded-xl mx-2 mb-1 min-h-[44px] ${
+                          getActiveTab() === item.name
+                            ? "text-[#1890FF] bg-[#1890FF]/5"
+                            : "text-[#64607d] hover:text-[#1890FF] hover:bg-gray-50"
+                        }`}
+                        onClick={handleMobileNavClick}
+                      >
+                        {item.name}
 
-                      {/* Active indicator for mobile */}
-                      {activeTab === item.name && (
-                        <motion.div
-                          className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0F73FF] to-[#1890FF] rounded-r-full"
-                          layoutId="mobileActiveIndicator"
-                          initial={{ opacity: 0, scaleY: 0 }}
-                          animate={{ opacity: 1, scaleY: 1 }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
-                        />
-                      )}
-                    </motion.a>
+                        {/* Active indicator for mobile */}
+                        {getActiveTab() === item.name && (
+                          <motion.div
+                            className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0F73FF] to-[#1890FF] rounded-r-full"
+                            layoutId="mobileActiveIndicator"
+                            initial={{ opacity: 0, scaleY: 0 }}
+                            animate={{ opacity: 1, scaleY: 1 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
                   ))}
                 </nav>
 
