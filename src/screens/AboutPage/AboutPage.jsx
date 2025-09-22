@@ -1,52 +1,113 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useInView, useMotionValue, animate, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  animate,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Separator } from "../../components/ui/separator";
 import { Card, CardContent } from "../../components/ui/card";
+import { AdditionalFeaturesSection } from "../LandingPage/sections/AdditionalFeaturesSection";
+import { WhyChooseMesdoSection } from "../LandingPage/sections/WhyChooseMesdoSection";
 import { CommunitySection } from "../LandingPage/sections/CommunitySection/CommunitySection";
+import { FeaturesSection } from "../LandingPage/sections/FeaturesSection";
+import { FeaturesWrapperSection } from "../LandingPage/sections/FeaturesWrapperSection";
 import { ContactSection } from "../LandingPage/sections/ContactSection/ContactSection";
 import { FooterSection } from "../LandingPage/sections/FooterSection/FooterSection";
 
-
-export const AboutPage = () => {
-  const storyRef = useRef(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [displayCount, setDisplayCount] = useState("0");
-  const countRef = useRef(null);
-  const isInView = useInView(countRef, { once: false, amount: 0.3 });
-
-  // Use Framer Motion's useMotionValue for smooth animation
-  const count = useMotionValue(0);
+// Smooth Counter Component with optimized rendering
+const SmoothCounter = ({ value, className }) => {
+  const motionValue = useMotionValue(0);
+  const [displayValue, setDisplayValue] = useState("0");
+  const lastUpdateTime = useRef(0);
 
   useEffect(() => {
-    // Subscribe to motion value changes with much slower throttling to eliminate jerky effect
-    let lastUpdate = 0;
-    const unsubscribe = count.on("change", (latest) => {
+    const unsubscribe = motionValue.on("change", (latest) => {
       const now = Date.now();
-      // Throttle updates to every 200ms for smoother, smaller increments
-      if (now - lastUpdate > 200) {
-        setDisplayCount(Math.round(latest).toLocaleString("en-IN"));
-        lastUpdate = now;
+      // Throttle updates to 60fps for smoother visual experience
+      if (now - lastUpdateTime.current > 16) {
+        setDisplayValue(Math.round(latest).toLocaleString("en-IN"));
+        lastUpdateTime.current = now;
       }
     });
 
     return unsubscribe;
-  }, [count]);
+  }, [motionValue]);
+
+  useEffect(() => {
+    if (value > 0) {
+      // Ultra smooth animation with multiple easing segments
+      animate(motionValue, value, {
+        duration: 4, // 4 seconds for very smooth counting
+        ease: [0.16, 1, 0.3, 1], // Smoother easing curve
+        type: "tween",
+      });
+    } else {
+      // Quick reset to 0
+      animate(motionValue, 0, {
+        duration: 0.3,
+        ease: "easeOut",
+      });
+    }
+  }, [motionValue, value]);
+
+  return (
+    <motion.span
+      className={className}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      {displayValue}+
+    </motion.span>
+  );
+};
+
+export const AboutPage = () => {
+  const storyRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [targetCount, setTargetCount] = useState(0);
+  const countRef = useRef(null);
+  const lineRef = useRef(null);
+  const secondLineRef = useRef(null);
+  const thirdLineRef = useRef(null);
+  const isInView = useInView(countRef, { once: false, amount: 0.3 });
+
+  // Use scroll progress for line animation like Home page
+  const { scrollYProgress } = useScroll({
+    target: lineRef,
+    offset: ["start 0.8", "end 0.2"],
+  });
+
+  // Second line scroll progress
+  const { scrollYProgress: secondScrollYProgress } = useScroll({
+    target: secondLineRef,
+    offset: ["start 0.8", "end 0.2"],
+  });
+
+  // Third line scroll progress
+  const { scrollYProgress: thirdScrollYProgress } = useScroll({
+    target: thirdLineRef,
+    offset: ["start 0.8", "end 0.2"],
+  });
+
+  // Transform scroll progress to line height with direction sensitivity
+  const lineHeight = useTransform(scrollYProgress, [0, 0.3, 1], [0, 200, 200]);
+  const secondLineHeight = useTransform(secondScrollYProgress, [0, 0.3, 1], [0, 200, 200]);
+  const thirdLineHeight = useTransform(thirdScrollYProgress, [0, 0.3, 1], [0, 200, 200]);
 
   useEffect(() => {
     if (isInView) {
-      const animation = animate(count, 65000000, {
-        duration: 600, // EXTREMELY SLOW - 10 minutes (600 seconds)
-        ease: [0.25, 0.46, 0.45, 0.94], // Very smooth easing curve
-        repeat: Infinity, // Continuous loop
-        repeatType: "loop", // Simple loop for consistency
-        repeatDelay: 8, // 8 second pause between cycles
-      });
-      return animation.stop;
+      // Smooth transition to target number
+      setTargetCount(65000000);
     } else {
-      animate(count, 0, { duration: 4, ease: "easeOut" });
+      // Reset to 0 when out of view
+      setTargetCount(0);
     }
-  }, [isInView, count]);
+  }, [isInView]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -153,37 +214,18 @@ export const AboutPage = () => {
       title: "Disconnected and Outdated",
       description:
         "offline, merit-based hiring suffers, leaving many qualified professionals overlooked.",
-      isHighlighted: false,
-      cardClasses: "bg-primary-1 opacity-70 rounded-[16px] px-12 py-14",
-      percentageClasses: "text-daybreak-blue6 text-[64px] leading-[64px]",
-      titleClasses: "text-neutral-10 text-[24px] leading-[32px]",
-      descriptionClasses: "text-neutral-10 text-lg leading-[32px] w-[540px]",
-      gap: "gap-10",
     },
     {
-      percentage: "70%",
+      percentage: "70%", 
       title: "Disconnected and Outdated",
       description:
         "offline, merit-based hiring suffers, leaving many qualified professionals overlooked.",
-      isHighlighted: true,
-      cardClasses:
-        "rounded-[18px] bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] px-[54px] py-[64px]",
-      percentageClasses: "text-neutral-1 text-[72px] leading-[72px]",
-      titleClasses: "text-neutral-1 text-[26px] leading-[36px]",
-      descriptionClasses: "text-neutral-1 text-[20px] leading-[36px] w-[600px]",
-      gap: "gap-[46px]",
     },
     {
       percentage: "70%",
-      title: "Disconnected and Outdated",
+      title: "Disconnected and Outdated", 
       description:
         "offline, merit-based hiring suffers, leaving many qualified professionals overlooked.",
-      isHighlighted: false,
-      cardClasses: "bg-primary-1 opacity-70 rounded-[16px] px-12 py-14",
-      percentageClasses: "text-daybreak-blue6 text-[64px] leading-[64px]",
-      titleClasses: "text-neutral-10 text-[24px] leading-[32px]",
-      descriptionClasses: "text-neutral-10 text-lg leading-[32px] w-[540px]",
-      gap: "gap-10",
     },
   ];
 
@@ -298,7 +340,10 @@ export const AboutPage = () => {
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  {displayCount}+
+                  <SmoothCounter
+                    value={targetCount}
+                    className="[font-family:'Inter',Helvetica] font-bold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0] leading-tight"
+                  />
                 </motion.h1>
                 <motion.p
                   className="[font-family:'Inter',Helvetica] font-normal text-neutral-1 text-lg sm:text-xl md:text-2xl lg:text-[26px] tracking-[0] leading-relaxed text-center"
@@ -309,44 +354,123 @@ export const AboutPage = () => {
               </motion.div>
             </motion.div>
 
-            <motion.button
-              type="button"
-              aria-label="Scroll to content"
-              onClick={handleScrollIndicatorClick}
-              className="flex flex-col items-center justify-center absolute inset-x-0 bottom-10 mx-auto w-max cursor-pointer"
+            {/* Enhanced Scroll Indicator */}
+            <motion.div
+              className="absolute inset-x-0 bottom-8 mx-auto w-max cursor-pointer"
               variants={fadeInUpVariants}
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              onClick={handleScrollIndicatorClick}
             >
-              <motion.p
-                className="[font-family:'Inter',Helvetica] font-normal text-primary-6 text-xl tracking-[0] leading-[30px] whitespace-nowrap mb-2"
-                variants={fadeInUpVariants}
-              >
-                Scroll
-              </motion.p>
               <motion.div
-                whileHover={{ scale: 1.2 }}
-                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center gap-4 group"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
               >
-                <svg
-                  className="w-6 h-8 text-primary-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                {/* Scroll Text with Background */}
+                <motion.div
+                  className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                  whileHover={{
+                    bg: "rgba(255, 255, 255, 0.15)",
+                    borderColor: "rgba(255, 255, 255, 0.3)",
+                    boxShadow: "0 8px 32px rgba(255, 255, 255, 0.2)",
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <path d="m7 13 3 3 3-3m-3-4v7m6-8V5a2 2 0 00-2-2H8a2 2 0 00-2 2v6"></path>
-                </svg>
+                  <motion.p
+                    className="[font-family:'Inter',Helvetica] font-medium text-white text-sm tracking-[0.5px] uppercase"
+                    whileHover={{ color: "#ffffff" }}
+                  >
+                    Scroll to explore
+                  </motion.p>
+                </motion.div>
+
+                {/* Modern Scroll Icon Container */}
+                <motion.div
+                  className="relative"
+                  animate={{
+                    y: [0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {/* Scroll Mouse Icon */}
+                  <motion.div
+                    className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center relative group-hover:border-white/60"
+                    whileHover={{
+                      borderColor: "rgba(255, 255, 255, 0.8)",
+                      boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Mouse Wheel Dot */}
+                    <motion.div
+                      className="w-1 h-2 bg-white/60 rounded-full mt-2 group-hover:bg-white/80"
+                      animate={{
+                        y: [0, 8, 0],
+                        opacity: [0.6, 1, 0.6],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </motion.div>
+
+                  {/* Floating Arrow */}
+                  <motion.div
+                    className="absolute -bottom-6 left-1/2 transform -translate-x-1/2"
+                    animate={{
+                      y: [0, 4, 0],
+                      opacity: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5,
+                    }}
+                  >
+                    <svg
+                      className="w-4 h-4 text-white/60 group-hover:text-white/80"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </motion.div>
+                </motion.div>
+
+                {/* Glowing Dots */}
+                <motion.div
+                  className="flex gap-1 mt-2"
+                  variants={containerVariants}
+                >
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="w-1 h-1 bg-white/40 rounded-full"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.4, 1, 0.4],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  ))}
+                </motion.div>
               </motion.div>
-            </motion.button>
+            </motion.div>
           </motion.section>
 
           {/* Story Section */}
@@ -381,7 +505,39 @@ export const AboutPage = () => {
                     transition: { duration: 0.3 },
                   }}
                 >
-                  Our Original Story
+                  {(() => {
+                    const text = "Our Original Story";
+                    const words = text.split(" ");
+                    return (
+                      <span className="font-medium">
+                        {words.map((word, index) => (
+                          <motion.span
+                            key={index}
+                            className="inline-block mr-1"
+                            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                            whileInView={{
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                            }}
+                            transition={{
+                              duration: 0.5,
+                              delay: index * 0.1,
+                              ease: "easeOut",
+                            }}
+                            viewport={{ once: true }}
+                            whileHover={{
+                              scale: 1.05,
+                              color: "#1890FF",
+                              textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                      </span>
+                    );
+                  })()}
                 </motion.h2>
               </motion.header>
 
@@ -390,26 +546,19 @@ export const AboutPage = () => {
                 variants={containerVariants}
               >
                 <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  whileInView={{ scaleY: 1, opacity: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 15,
+                  ref={lineRef}
+                  className="relative overflow-hidden"
+                  style={{
+                    height: lineHeight,
                   }}
-                  whileHover={{ 
-                    scaleY: 1.1,
-                    scaleX: 1.2,
-                    transition: { duration: 0.3 }
+                  whileHover={{
+                    height: 220,
+                    transition: { duration: 0.3 },
                   }}
-                  style={{ originY: 0 }}
                 >
                   <Separator
                     orientation="vertical"
-                    className="w-0.5 h-[118px] bg-gradient-to-b from-gray-400 to-gray-600"
+                    className="w-0.5 h-[200px] bg-gradient-to-b from-gray-400 to-gray-600"
                   />
                 </motion.div>
 
@@ -424,9 +573,10 @@ export const AboutPage = () => {
                     variants={fadeInUpVariants}
                   >
                     <motion.span
-                      className="font-medium underline inline-flex items-center gap-2"
+                      className="font-medium underline inline-flex items-center gap-2 cursor-pointer"
                       whileHover={{ color: "#1890FF", scale: 1.05 }}
                       transition={{ duration: 0.2 }}
+                      onClick={() => window.open('https://www.linkedin.com/in/rthakar07/', '_blank')}
                     >
                       <motion.div
                         className="w-8 h-8 rounded-full border-2 border-white shadow-lg overflow-hidden"
@@ -456,9 +606,10 @@ export const AboutPage = () => {
                     </motion.span>
                     <span className="font-medium"> and </span>
                     <motion.span
-                      className="font-medium underline inline-flex items-center gap-2"
+                      className="font-medium underline inline-flex items-center gap-2 cursor-pointer"
                       whileHover={{ color: "#1890FF", scale: 1.05 }}
                       transition={{ duration: 0.2 }}
+                      onClick={() => window.open('https://www.linkedin.com/in/rachitelhance/', '_blank')}
                     >
                       <motion.div
                         className="w-8 h-8 rounded-full border-2 border-white shadow-lg overflow-hidden"
@@ -486,46 +637,62 @@ export const AboutPage = () => {
                       </motion.div>
                       Rachit
                     </motion.span>
-                    <span className="font-medium">
-                      {" "}
-                      have known each other since First Day of the college. Over
-                      chai, calls, and long walks, we kept circling one shared
-                      thought—what would it look like to build something
-                      meaningful of our own?"
-                      <br />
-                      "We explored a bunch of directions. But nothing felt
-                      real... until one conversation flipped everything.
-                    </span>
+{(() => {
+                      const text = "have known each other since First Day of the college. Over chai, calls, and long walks, we kept circling one shared thought—what would it look like to build something meaningful of our own? We explored a bunch of directions. But nothing felt real... until one conversation flipped everything.";
+                      const words = text.split(" ");
+                      return (
+                        <span className="font-medium">
+                          {" "}
+                          {words.map((word, index) => (
+                            <motion.span
+                              key={index}
+                              className="inline-block mr-1"
+                              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                              whileInView={{
+                                opacity: 1,
+                                y: 0,
+                                filter: "blur(0px)",
+                              }}
+                              transition={{
+                                duration: 0.5,
+                                delay: index * 0.08,
+                                ease: "easeOut",
+                              }}
+                              viewport={{ once: true }}
+                              whileHover={{
+                                scale: 1.05,
+                                color: "#1890FF",
+                                textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                              }}
+                            >
+                              {word}
+                            </motion.span>
+                          ))}
+                        </span>
+                      );
+                    })()}
                   </motion.p>
                 </motion.div>
 
                 <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  whileInView={{ scaleY: 1, opacity: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 15,
+                  ref={thirdLineRef}
+                  className="relative overflow-hidden"
+                  style={{
+                    height: thirdLineHeight,
                   }}
-                  whileHover={{ 
-                    scaleY: 1.1,
-                    scaleX: 1.2,
-                    transition: { duration: 0.3 }
+                  whileHover={{
+                    height: 220,
+                    transition: { duration: 0.3 },
                   }}
-                  style={{ originY: 0 }}
                 >
                   <Separator
                     orientation="vertical"
-                    className="w-0.5 h-[118px] bg-gradient-to-b from-gray-400 to-gray-600"
+                    className="w-0.5 h-[200px] bg-gradient-to-b from-gray-400 to-gray-600"
                   />
                 </motion.div>
               </motion.div>
             </motion.div>
           </motion.section>
-
 
           {/* Benefits Overview Section */}
           <motion.section
@@ -543,11 +710,45 @@ export const AboutPage = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: false }}
             >
-              <span className="font-medium">One fine day </span>
+              {(() => {
+                const text = "One fine day";
+                const words = text.split(" ");
+                return (
+                  <span className="font-medium">
+                    {words.map((word, index) => (
+                      <motion.span
+                        key={index}
+                        className="inline-block mr-1"
+                        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                        whileInView={{
+                          opacity: 1,
+                          y: 0,
+                          filter: "blur(0px)",
+                        }}
+                        transition={{
+                          duration: 0.5,
+                          delay: index * 0.1,
+                          ease: "easeOut",
+                        }}
+                        viewport={{ once: true }}
+                        whileHover={{
+                          scale: 1.05,
+                          color: "#1890FF",
+                          textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                    {" "}
+                  </span>
+                );
+              })()}
               <motion.span
-                className="font-medium underline inline-flex items-center gap-2"
+                className="font-medium underline inline-flex items-center gap-2 cursor-pointer"
                 whileHover={{ color: "#1890FF", scale: 1.05 }}
                 transition={{ duration: 0.2 }}
+                onClick={() => window.open('https://www.linkedin.com/in/rachitelhance/', '_blank')}
               >
                 <motion.div
                   className="w-7 h-7 rounded-full border-2 border-white shadow-md overflow-hidden"
@@ -575,7 +776,40 @@ export const AboutPage = () => {
                 </motion.div>
                 Rachit
               </motion.span>
-              <span className="font-medium"> was talking to his relative.</span>
+{(() => {
+                const text = "was talking to his relative.";
+                const words = text.split(" ");
+                return (
+                  <span className="font-medium">
+                    {" "}
+                    {words.map((word, index) => (
+                      <motion.span
+                        key={index}
+                        className="inline-block mr-1"
+                        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                        whileInView={{
+                          opacity: 1,
+                          y: 0,
+                          filter: "blur(0px)",
+                        }}
+                        transition={{
+                          duration: 0.5,
+                          delay: index * 0.1,
+                          ease: "easeOut",
+                        }}
+                        viewport={{ once: true }}
+                        whileHover={{
+                          scale: 1.05,
+                          color: "#1890FF",
+                          textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                        }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </span>
+                );
+              })()}
             </motion.header>
 
             <motion.div
@@ -588,24 +822,26 @@ export const AboutPage = () => {
                   className={`inline-flex items-center gap-2 px-8 py-[22px] ml-[80px] absolute ${bubble.position} ${bubble.borderRadius} ${bubble.rotation} bg-[linear-gradient(180deg,rgba(15,115,255,1)_0%,rgba(24,144,255,1)_100%)] cursor-pointer`}
                   initial={{
                     opacity: 0,
-                    scale: 0.8,
-                    y: 30,
-                    rotate: bubble.rotation.includes("-") ? -15 : 15,
-                    filter: "blur(8px)",
+                    scale: 0.3,
+                    x: bubble.side === "left" ? -100 : 100,
+                    y: 50,
+                    rotate: bubble.rotation.includes("-") ? -20 : 20,
+                    filter: "blur(12px)",
                   }}
                   whileInView={{
                     opacity: 1,
                     scale: 1,
+                    x: 0,
                     y: 0,
                     rotate: bubble.rotation.includes("-") ? -1 : 1,
                     filter: "blur(0px)",
                     transition: {
-                      duration: 0.8,
-                      delay: index * 0.3,
-                      ease: [0.25, 0.46, 0.45, 0.94],
+                      duration: 0.9,
+                      delay: index * 1.2, // Longer delay between messages
+                      ease: [0.175, 0.885, 0.32, 1.275],
                       type: "spring",
-                      stiffness: 100,
-                      damping: 12,
+                      stiffness: 120,
+                      damping: 15,
                     },
                   }}
                   viewport={{ once: false, amount: 0.3 }}
@@ -639,13 +875,13 @@ export const AboutPage = () => {
                       duration: 4,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: index * 0.8,
+                      delay: index * 1.5,
                     },
                     rotate: {
                       duration: 6,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: index * 0.6,
+                      delay: index * 1.2,
                     },
                   }}
                 >
@@ -654,8 +890,8 @@ export const AboutPage = () => {
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{
-                      delay: index * 0.3 + 0.4,
-                      duration: 0.5,
+                      delay: index * 1.2 + 0.6, // Text appears after bubble animation
+                      duration: 0.6,
                       ease: "easeOut",
                     }}
                     viewport={{ once: false }}
@@ -694,33 +930,61 @@ export const AboutPage = () => {
                 variants={fadeInUpVariants}
               >
                 <motion.div
-                  className="relative w-0.5 h-[118px] bg-gradient-to-b from-gray-400 to-gray-600"
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  whileInView={{ scaleY: 1, opacity: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{
-                    duration: 1.5,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    type: "spring",
-                    stiffness: 80,
-                    damping: 18,
+                  ref={secondLineRef}
+                  className="relative overflow-hidden"
+                  style={{
+                    height: secondLineHeight,
                   }}
-                  whileHover={{ 
-                    scaleY: 1.15,
-                    scaleX: 1.5,
-                    transition: { duration: 0.3 }
+                  whileHover={{
+                    height: 220,
+                    transition: { duration: 0.3 },
                   }}
-                  style={{ originY: 0 }}
-                />
+                >
+                  <div className="w-0.5 h-[200px] bg-gradient-to-b from-gray-400 to-gray-600" />
+                </motion.div>
 
                 <motion.div
                   className="relative w-fit [font-family:'Inter',Helvetica] font-normal text-transparent text-[32px] text-center tracking-[0] leading-[43px] whitespace-nowrap"
                   variants={fadeInUpVariants}
                 >
-                  <span className="font-medium text-[#060b13]">What </span>
+                  {(() => {
+                    const text = "What";
+                    const words = text.split(" ");
+                    return (
+                      <span className="font-medium text-[#060b13]">
+                        {words.map((word, index) => (
+                          <motion.span
+                            key={index}
+                            className="inline-block mr-1"
+                            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                            whileInView={{
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                            }}
+                            transition={{
+                              duration: 0.5,
+                              delay: index * 0.1,
+                              ease: "easeOut",
+                            }}
+                            viewport={{ once: true }}
+                            whileHover={{
+                              scale: 1.05,
+                              color: "#1890FF",
+                              textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                        {" "}
+                      </span>
+                    );
+                  })()}
                   <motion.span
-                    className="font-medium text-[#060b13] underline inline-flex items-center gap-2"
+                    className="font-medium text-[#060b13] underline inline-flex items-center gap-2 cursor-pointer"
                     whileHover={{ color: "#1890FF" }}
+                    onClick={() => window.open('https://www.linkedin.com/in/rachitelhance/', '_blank')}
                   >
                     <motion.div
                       className="w-7 h-7 rounded-full border-2 border-white shadow-md overflow-hidden"
@@ -748,10 +1012,45 @@ export const AboutPage = () => {
                     </motion.div>
                     Rachit
                   </motion.span>
-                  <span className="font-medium text-[#060b13]"> & </span>
+                  {(() => {
+                    const text = "&";
+                    const words = text.split(" ");
+                    return (
+                      <span className="font-medium text-[#060b13]">
+                        {" "}
+                        {words.map((word, index) => (
+                          <motion.span
+                            key={index}
+                            className="inline-block mr-1"
+                            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                            whileInView={{
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                            }}
+                            transition={{
+                              duration: 0.5,
+                              delay: index * 0.1 + 0.3,
+                              ease: "easeOut",
+                            }}
+                            viewport={{ once: true }}
+                            whileHover={{
+                              scale: 1.05,
+                              color: "#1890FF",
+                              textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                        {" "}
+                      </span>
+                    );
+                  })()}
                   <motion.span
-                    className="font-medium text-[#060b13] underline inline-flex items-center gap-2"
+                    className="font-medium text-[#060b13] underline inline-flex items-center gap-2 cursor-pointer"
                     whileHover={{ color: "#1890FF" }}
+                    onClick={() => window.open('https://www.linkedin.com/in/rthakar07/', '_blank')}
                   >
                     <motion.div
                       className="w-7 h-7 rounded-full border-2 border-white shadow-md overflow-hidden"
@@ -779,10 +1078,40 @@ export const AboutPage = () => {
                     </motion.div>
                     Rahul
                   </motion.span>
-                  <span className="font-medium text-[#060b13]">
-                    {" "}
-                    Found out next was shocking
-                  </span>
+                  {(() => {
+                    const text = "Found out next was shocking";
+                    const words = text.split(" ");
+                    return (
+                      <span className="font-medium text-[#060b13]">
+                        {" "}
+                        {words.map((word, index) => (
+                          <motion.span
+                            key={index}
+                            className="inline-block mr-1"
+                            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                            whileInView={{
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                            }}
+                            transition={{
+                              duration: 0.5,
+                              delay: index * 0.1 + 0.6,
+                              ease: "easeOut",
+                            }}
+                            viewport={{ once: true }}
+                            whileHover={{
+                              scale: 1.05,
+                              color: "#1890FF",
+                              textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                      </span>
+                    );
+                  })()}
                 </motion.div>
               </motion.div>
 
@@ -794,10 +1123,10 @@ export const AboutPage = () => {
                   <motion.div
                     key={index}
                     variants={fadeInUpVariants}
+                    className="group cursor-pointer"
                     whileHover={{
                       scale: 1.02,
-                      y: -4,
-                      boxShadow: "0 20px 40px rgba(24, 144, 255, 0.3)",
+                      y: -6,
                       transition: {
                         type: "spring",
                         stiffness: 260,
@@ -816,17 +1145,28 @@ export const AboutPage = () => {
                       repeat: Infinity,
                       ease: "easeInOut",
                       delay: index * 0.8,
-                      hover: { type: "spring", stiffness: 220, damping: 20 },
                     }}
                   >
-                    <Card
-                      className={`inline-flex flex-col items-start ${stat.gap} relative flex-[0_0_auto] ${stat.cardClasses} border-none shadow-none`}
+                    <motion.div
+                      className="bg-primary-1 opacity-70 rounded-[16px] px-12 py-14 border-none shadow-none relative overflow-hidden"
+                      whileHover={{
+                        background: "linear-gradient(180deg,rgba(15,115,255,1) 0%,rgba(24,144,255,1) 100%)",
+                        opacity: 1,
+                        borderRadius: "18px",
+                        paddingLeft: "54px",
+                        paddingRight: "54px", 
+                        paddingTop: "64px",
+                        paddingBottom: "64px",
+                        boxShadow: "0 25px 50px rgba(24, 144, 255, 0.4)",
+                        transition: {
+                          duration: 0.3,
+                          ease: "easeOut"
+                        }
+                      }}
                     >
-                      <CardContent className="p-0 flex flex-col items-start gap-4">
+                      <div className="flex flex-col items-start gap-10 group-hover:gap-[46px] transition-all duration-300">
                         <motion.div
-                          className={`relative w-fit mt-[-1.00px] [font-family:'Inter',Helvetica] font-bold text-center tracking-[0] whitespace-nowrap ${
-                            stat.percentageClasses
-                          } ${stat.isHighlighted ? "mt-[-1.12px]" : ""}`}
+                          className="relative w-fit [font-family:'Inter',Helvetica] font-bold text-center tracking-[0] whitespace-nowrap text-daybreak-blue6 text-[64px] leading-[64px] group-hover:text-neutral-1 group-hover:text-[72px] group-hover:leading-[72px] transition-all duration-300"
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5 }}
@@ -837,9 +1177,7 @@ export const AboutPage = () => {
 
                         <div className="inline-flex flex-col items-start justify-center gap-4 relative flex-[0_0_auto]">
                           <motion.div
-                            className={`relative w-fit mt-[-1.00px] [font-family:'Inter',Helvetica] font-medium text-center tracking-[0] whitespace-nowrap ${
-                              stat.titleClasses
-                            } ${stat.isHighlighted ? "mt-[-1.12px]" : ""}`}
+                            className="relative w-fit [font-family:'Inter',Helvetica] font-medium text-center tracking-[0] whitespace-nowrap text-neutral-10 text-[24px] leading-[32px] group-hover:text-neutral-1 group-hover:text-[26px] group-hover:leading-[36px] transition-all duration-300"
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
@@ -849,7 +1187,7 @@ export const AboutPage = () => {
                           </motion.div>
 
                           <motion.div
-                            className={`relative [font-family:'Inter',Helvetica] font-normal tracking-[0] ${stat.descriptionClasses}`}
+                            className="relative [font-family:'Inter',Helvetica] font-normal tracking-[0] text-neutral-10 text-lg leading-[32px] w-[540px] group-hover:text-neutral-1 group-hover:text-[20px] group-hover:leading-[36px] group-hover:w-[600px] transition-all duration-300"
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
@@ -858,8 +1196,8 @@ export const AboutPage = () => {
                             {stat.description}
                           </motion.div>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -872,8 +1210,8 @@ export const AboutPage = () => {
                   className="inline-flex flex-col items中心 justify-center gap-4 relative flex-[0_0_auto]"
                   variants={containerVariants}
                 >
-                  <motion.div
-                    className="relative w-[880px] [font-family:'Inter',Helvetica] font-normal text-[#060b13] text-[32px] text-center tracking-[0] leading-[43px]"
+                  <motion.p
+                    className="relative w-[850px] [font-family:'Inter',Helvetica] font-normal text-[#060b13] text-[32px] text-center tracking-[0] leading-[43px]"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{
@@ -885,15 +1223,40 @@ export const AboutPage = () => {
                     }}
                     viewport={{ once: false }}
                   >
-                    That&apos;s why Mesdo started
-                    <br />
-                    <br />
-                    Because healthcare professionals shouldn&apos;t have to rely
-                    on luck, contacts, or WhatsApp forwards to find the right
-                    job.
-                    <br />
-                    We&apos;re here to change that — one step at a time
-                  </motion.div>
+                    {(() => {
+                      const text = "That's why Mesdo started. Because healthcare professionals shouldn't have to rely on luck, contacts, or WhatsApp forwards to find the right job. We're here to change that — one step at a time";
+                      const words = text.split(" ");
+                      return (
+                        <span className="font-medium">
+                          {words.map((word, index) => (
+                            <motion.span
+                              key={index}
+                              className="inline-block mr-1"
+                              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                              whileInView={{
+                                opacity: 1,
+                                y: 0,
+                                filter: "blur(0px)",
+                              }}
+                              transition={{
+                                duration: 0.5,
+                                delay: index * 0.08,
+                                ease: "easeOut",
+                              }}
+                              viewport={{ once: true }}
+                              whileHover={{
+                                scale: 1.05,
+                                color: "#1890FF",
+                                textShadow: "0 0 8px rgba(24, 144, 255, 0.3)",
+                              }}
+                            >
+                              {word}
+                            </motion.span>
+                          ))}
+                        </span>
+                      );
+                    })()}
+                  </motion.p>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -1065,8 +1428,20 @@ export const AboutPage = () => {
             </motion.div>
           </motion.section>
 
+          {/* Additional Features Section - Using Homepage Component */}
+          <AdditionalFeaturesSection />
+
+          {/* Why Choose Mesdo Section - Using Homepage Component */}
+          <WhyChooseMesdoSection />
+
           {/* Community Section - Using Homepage Component */}
           <CommunitySection />
+
+          {/* Features Section - Using Homepage Component */}
+          <FeaturesSection />
+
+          {/* Features Wrapper Section - Using Homepage Component */}
+          <FeaturesWrapperSection />
 
           {/* Contact Section - Using Homepage Component */}
           <ContactSection />
