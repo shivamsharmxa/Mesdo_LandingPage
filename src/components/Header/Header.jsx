@@ -199,6 +199,7 @@ export const Header = () => {
                   boxShadow: "0 10px 25px rgba(24, 144, 255, 0.3)",
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => window.open('https://mesdo.netlify.app/', '_blank')}
               >
                 Get Started
               </motion.button>
@@ -338,7 +339,10 @@ export const Header = () => {
                       boxShadow: "0 10px 25px rgba(24, 144, 255, 0.3)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.open('https://mesdo.netlify.app/', '_blank');
+                    }}
                   >
                     Get Started
                   </motion.button>
